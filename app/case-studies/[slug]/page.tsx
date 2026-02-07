@@ -12,15 +12,10 @@ import MetricsGrid from "@/components/case-studies/MetricsGrid";
 import TestimonialBlock from "@/components/case-studies/TestimonialBlock";
 import CaseStudyContent from "@/components/case-studies/CaseStudyContent";
 
+export const dynamic = "force-dynamic";
+
 interface PageProps {
   params: Promise<{ slug: string }>;
-}
-
-export async function generateStaticParams() {
-  const studies = await getAllCaseStudies();
-  return studies.map((study) => ({
-    slug: study.slug,
-  }));
 }
 
 export async function generateMetadata({

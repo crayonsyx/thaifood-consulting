@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { getAllCaseStudies } from "@/lib/content";
+
+export const dynamic = "force-dynamic";
 import { siteConfig } from "@/lib/constants";
 import { breadcrumbSchema } from "@/lib/seo";
 import JsonLd from "@/components/shared/JsonLd";
