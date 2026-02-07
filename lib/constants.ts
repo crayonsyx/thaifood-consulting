@@ -1,0 +1,40 @@
+export const siteConfig = {
+  name: "ThaiFood Consulting",
+  description:
+    "F&B consulting firm with Michelin-starred experience, helping restaurants and food businesses launch, grow, and optimize in Thailand and Southeast Asia.",
+  url: "https://thaifood-consulting.vercel.app",
+  ogImage: "/og.png",
+  email: "hello@thaifoodconsulting.com",
+  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "+6587517413",
+  phone: "+6587517413",
+  address: {
+    city: "Bangkok",
+    country: "Thailand",
+  },
+  social: {
+    linkedin: "https://linkedin.com/company/thaifood-consulting",
+    instagram: "https://instagram.com/thaifoodconsulting",
+  },
+} as const;
+
+export const navLinks = [
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Case Studies", href: "/case-studies" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact" },
+] as const;
+
+export const stats = [
+  { value: "15+", label: "Years Experience" },
+  { value: "50+", label: "Projects Delivered" },
+  { value: "5", label: "Countries" },
+] as const;
+
+export const categories = [
+  { label: "All", slug: "all" },
+  { label: "Opening a Restaurant", slug: "opening-a-restaurant" },
+  { label: "Menu Engineering", slug: "menu-engineering" },
+  { label: "F&B Trends", slug: "fnb-trends" },
+  { label: "Operations", slug: "operations" },
+] as const;

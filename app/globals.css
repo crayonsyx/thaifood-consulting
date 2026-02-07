@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0a;
+  --background-secondary: #1a1a1a;
+  --background-card: #141414;
+  --foreground: #faf5f0;
+  --foreground-muted: #a0998f;
+  --foreground-subtle: #6b6560;
+  --accent-gold: #c4956a;
+  --accent-gold-light: #d4a574;
+  --border: #2a2a2a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+  --color-background-card: var(--background-card);
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-foreground-subtle: var(--foreground-subtle);
+  --color-accent-gold: var(--accent-gold);
+  --color-accent-gold-light: var(--accent-gold-light);
+  --color-border: var(--border);
+  --font-heading: var(--font-playfair);
+  --font-body: var(--font-inter);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prose styles for MDX content */
+.prose {
+  --tw-prose-body: var(--foreground);
+  --tw-prose-headings: var(--foreground);
+  --tw-prose-links: var(--accent-gold);
+  --tw-prose-bold: var(--foreground);
+  --tw-prose-counters: var(--foreground-muted);
+  --tw-prose-bullets: var(--foreground-subtle);
+  --tw-prose-hr: var(--border);
+  --tw-prose-quotes: var(--foreground-muted);
+  --tw-prose-quote-borders: var(--accent-gold);
+  --tw-prose-captions: var(--foreground-subtle);
+  --tw-prose-code: var(--foreground);
+  --tw-prose-pre-code: var(--foreground);
+  --tw-prose-pre-bg: var(--background-secondary);
+  --tw-prose-th-borders: var(--border);
+  --tw-prose-td-borders: var(--border);
+}
+
+.prose h2 {
+  font-family: var(--font-heading), serif;
+  letter-spacing: 0.5px;
+}
+
+.prose h3 {
+  font-family: var(--font-heading), serif;
+  letter-spacing: 0.3px;
+}
+
+.prose a {
+  text-decoration-color: var(--accent-gold);
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+
+.prose a:hover {
+  color: var(--accent-gold-light);
+}
+
+/* Fade-in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  opacity: 0;
+}
+
+.animation-delay-100 {
+  animation-delay: 0.1s;
+}
+.animation-delay-200 {
+  animation-delay: 0.2s;
+}
+.animation-delay-300 {
+  animation-delay: 0.3s;
+}
+.animation-delay-400 {
+  animation-delay: 0.4s;
+}
