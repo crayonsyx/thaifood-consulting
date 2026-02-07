@@ -38,7 +38,7 @@ export default function Home() {
             <br />
             Done Right.
           </h1>
-          <p className="animate-fade-in-up animation-delay-100 mx-auto mt-6 max-w-2xl text-lg text-foreground-muted md:text-xl">
+          <p className="animate-fade-in-up animation-delay-100 mx-auto mt-6 max-w-2xl text-lg text-white/90 md:text-xl">
             Michelin-starred expertise for restaurants and food businesses across
             Thailand and Southeast Asia.
           </p>
