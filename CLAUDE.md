@@ -95,11 +95,21 @@ npm run lint     # ESLint
 - Blog targets "how to open a restaurant in Thailand" keywords (Cluster 1 — highest priority)
 
 ## What's Done
-- Full site scaffold with 18 routes
+- Full site scaffold with 18 routes, **deployed at https://thaifood-consulting.vercel.app/**
 - Homepage with 7 sections
 - About page with founder story
 - 4 service pages (Menu Engineering, Concept Development, Cloud Kitchen, Feasibility Study)
-- Blog system with MDX rendering, 2 launch posts (~5000 and ~3500 words)
+- Blog system with MDX rendering, **10 SEO blog posts** (3000-5000 words each):
+  1. The Complete Guide to Opening a Restaurant in Thailand (2026) — *featured*
+  2. How to Open a Fine Dining Restaurant in Bangkok
+  3. How to Start a Cloud Kitchen in Bangkok
+  4. How to Open a Cafe in Thailand
+  5. Why Restaurants Fail in Thailand: 12 Reasons
+  6. Restaurant Staffing in Thailand: Salaries, Labor Law, Retention
+  7. How Much Does It Cost to Open a Restaurant in Bangkok?
+  8. Menu Engineering for Thai Restaurants
+  9. Can a Foreigner Own a Restaurant in Thailand?
+  10. How to Find a Restaurant Location in Bangkok
 - Case studies system with 2 placeholder studies
 - Contact + Free Consultation forms (Web3Forms)
 - WhatsApp floating button
@@ -107,6 +117,7 @@ npm run lint     # ESLint
 - Sitemap, robots.txt, RSS feed, OG image generation
 
 ## What's Pending
+- **TinaCMS integration** — self-hosted on Vercel (free, git-backed), replaces Velite as content layer, adds `/admin` visual editor
 - Replace Unsplash placeholders with real photography (via `lib/images.ts`)
 - Set up GA4 measurement ID after business registration
 - Domain purchase and Vercel configuration
