@@ -1,4 +1,7 @@
-import { defineConfig } from "tinacms";
+import { defineConfig, LocalAuthProvider } from "tinacms";
+import { UsernamePasswordAuthJSProvider } from "tinacms-authjs/dist/tinacms";
+
+const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
 
 const branch =
   process.env.GITHUB_BRANCH ||
@@ -71,6 +74,9 @@ export default defineConfig({
   branch,
   // No clientId/token — self-hosted, not TinaCloud
   contentApiUrlOverride: "/api/tina/gql",
+  authProvider: isLocal
+    ? new LocalAuthProvider()
+    : new UsernamePasswordAuthJSProvider(),
   build: {
     outputFolder: "admin",
     publicFolder: "public",
