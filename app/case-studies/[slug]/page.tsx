@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { caseStudies } from "#site/content";
-import { getCaseStudyBySlug, formatDate } from "@/lib/content";
+import { getAllCaseStudies, getCaseStudyBySlug, formatDate } from "@/lib/content";
 import { siteConfig } from "@/lib/constants";
 import { articleSchema, breadcrumbSchema } from "@/lib/seo";
 import { images } from "@/lib/images";
@@ -17,8 +16,9 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export function generateStaticParams() {
-  return caseStudies.map((study) => ({
+export async function generateStaticParams() {
+  const studies = await getAllCaseStudies();
+  return studies.map((study) => ({
     slug: study.slug,
   }));
 }
@@ -27,14 +27,14 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const study = getCaseStudyBySlug(caseStudies, slug);
+  const study = await getCaseStudyBySlug(slug);
 
   if (!study) {
     return { title: "Case Study Not Found" };
   }
 
   const title = study.seo?.title || study.title;
-  const description = study.seo?.description || study.excerpt;
+  const description = study.seo?.description || study.excerpt || "";
 
   return {
     title,
@@ -59,21 +59,29 @@ export async function generateMetadata({
 
 export default async function CaseStudyPage({ params }: PageProps) {
   const { slug } = await params;
-  const study = getCaseStudyBySlug(caseStudies, slug);
+  const study = await getCaseStudyBySlug(slug);
 
   if (!study) {
     notFound();
   }
+
+  // Normalize metrics for MetricsGrid (filter nulls)
+  const metrics =
+    study.metrics
+      ?.filter(
+        (m): m is { label: string; before: string; after: string } =>
+          Boolean(m?.label && m?.before && m?.after)
+      ) ?? [];
 
   return (
     <>
       <JsonLd
         data={articleSchema({
           title: study.title,
-          description: study.seo?.description || study.excerpt,
+          description: study.seo?.description || study.excerpt || "",
           datePublished: study.date,
           url: `${siteConfig.url}/case-studies/${study.slug}`,
-          image: study.coverImage,
+          image: study.coverImage ?? undefined,
         })}
       />
       <JsonLd
@@ -116,7 +124,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
               {study.title}
             </h1>
             <div className="mt-4 flex items-center gap-4 text-foreground-muted text-sm">
-              <span>{study.client}</span>
+              <span>{study.client ?? "Confidential"}</span>
               <span aria-hidden="true">&middot;</span>
               <time dateTime={study.date}>{formatDate(study.date)}</time>
             </div>
@@ -127,18 +135,18 @@ export default async function CaseStudyPage({ params }: PageProps) {
       {/* MDX Body */}
       <section className="py-16">
         <div className="max-w-3xl mx-auto px-6">
-          <CaseStudyContent code={study.body} />
+          <CaseStudyContent content={study.body} />
         </div>
       </section>
 
       {/* Results / Metrics */}
-      {study.metrics && study.metrics.length > 0 && (
+      {metrics.length > 0 && (
         <section className="py-16 bg-background-secondary">
           <div className="max-w-4xl mx-auto px-6">
             <h2 className="font-heading text-3xl md:text-4xl text-foreground mb-10 text-center">
               The Results
             </h2>
-            <MetricsGrid metrics={study.metrics} />
+            <MetricsGrid metrics={metrics} />
           </div>
         </section>
       )}
@@ -146,9 +154,9 @@ export default async function CaseStudyPage({ params }: PageProps) {
       {/* Testimonial */}
       {study.testimonial && (
         <TestimonialBlock
-          quote={study.testimonial.quote}
-          author={study.testimonial.author}
-          role={study.testimonial.role}
+          quote={study.testimonial.quote ?? ""}
+          author={study.testimonial.author ?? ""}
+          role={study.testimonial.role ?? ""}
         />
       )}
 

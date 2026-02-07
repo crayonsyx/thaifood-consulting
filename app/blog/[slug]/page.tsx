@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { blogs } from "#site/content";
 import {
+  getPublishedPosts,
   getPostBySlug,
   getRelatedPosts,
   formatDate,
@@ -24,7 +24,8 @@ interface BlogPostPageProps {
 }
 
 export async function generateStaticParams() {
-  return blogs.map((post) => ({
+  const posts = await getPublishedPosts();
+  return posts.map((post) => ({
     slug: post.slug,
   }));
 }
@@ -33,14 +34,14 @@ export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(blogs, slug);
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     return {};
   }
 
   const title = post.seo?.title || post.title;
-  const description = post.seo?.description || post.excerpt;
+  const description = post.seo?.description || post.excerpt || "";
   const ogImage = post.coverImage
     ? post.coverImage
     : `${siteConfig.url}/api/og?title=${encodeURIComponent(post.title)}`;
@@ -70,24 +71,36 @@ export async function generateMetadata({
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  const post = getPostBySlug(blogs, slug);
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     notFound();
   }
 
   const readTime = estimateReadingTime(post.body);
-  const related = getRelatedPosts(blogs, post.slug, post.category, 2);
+  const related = await getRelatedPosts(post.slug, post.category ?? "", 2);
   const postUrl = `${siteConfig.url}/blog/${post.slug}`;
   const coverImage = post.coverImage || images.blog.defaultCover;
   const coverAlt = post.coverImageAlt || post.title;
+
+  // Serialize related posts for PostGrid
+  const relatedSerialized = related.map((p) => ({
+    title: p.title,
+    slug: p.slug,
+    date: p.date,
+    excerpt: p.excerpt ?? "",
+    category: p.category ?? "",
+    coverImage: p.coverImage ?? undefined,
+    coverImageAlt: p.coverImageAlt ?? undefined,
+    body: p.body,
+  }));
 
   return (
     <>
       <JsonLd
         data={articleSchema({
           title: post.title,
-          description: post.seo?.description || post.excerpt,
+          description: post.seo?.description || post.excerpt || "",
           datePublished: post.date,
           url: postUrl,
           image: coverImage,
@@ -116,7 +129,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {/* Header */}
           <header className="mt-8 mb-10 animate-fade-in-up">
             <span className="text-accent-gold uppercase text-xs tracking-wider font-medium">
-              {post.category.replace(/-/g, " ")}
+              {(post.category ?? "").replace(/-/g, " ")}
             </span>
             <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl text-foreground mt-3 mb-4 leading-tight">
               {post.title}
@@ -143,7 +156,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           {/* MDX content */}
           <div className="prose max-w-none animate-fade-in-up animation-delay-200">
-            <MDXContent code={post.body} />
+            <MDXContent content={post.body} />
           </div>
 
           {/* Share buttons */}
@@ -164,12 +177,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
 
           {/* Related posts */}
-          {related.length > 0 && (
+          {relatedSerialized.length > 0 && (
             <section className="mt-16">
               <h2 className="font-heading text-2xl text-foreground mb-8">
                 Related Articles
               </h2>
-              <PostGrid posts={related} />
+              <PostGrid posts={relatedSerialized} />
             </section>
           )}
         </div>

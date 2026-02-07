@@ -8,27 +8,30 @@ interface CaseStudyCardProps {
     title: string;
     slug: string;
     industry: string;
-    excerpt: string;
-    coverImage?: string;
-    coverImageAlt?: string;
-    metrics?: {
-      label: string;
-      before: string;
-      after: string;
-    }[];
+    excerpt?: string | null;
+    coverImage?: string | null;
+    coverImageAlt?: string | null;
+    metrics?: ({
+      label?: string | null;
+      before?: string | null;
+      after?: string | null;
+    } | null)[] | null;
   };
 }
 
 export default function CaseStudyCard({ study }: CaseStudyCardProps) {
-  const firstMetric = study.metrics?.[0];
+  const firstMetric = study.metrics?.find(
+    (m): m is { label: string; before: string; after: string } =>
+      Boolean(m?.label && m?.before && m?.after)
+  );
 
   return (
     <Link href={`/case-studies/${study.slug}`} className="group block">
       <article className="rounded-xl border border-border bg-background-card overflow-hidden transition-colors duration-300 hover:border-accent-gold">
         <div className="aspect-video relative overflow-hidden">
           <Image
-            src={study.coverImage || images.caseStudies.italianBistro}
-            alt={study.coverImageAlt || study.title}
+            src={study.coverImage ?? images.caseStudies.italianBistro}
+            alt={study.coverImageAlt ?? study.title}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, 50vw"
@@ -43,7 +46,7 @@ export default function CaseStudyCard({ study }: CaseStudyCardProps) {
             {study.title}
           </h3>
           <p className="text-foreground-muted text-sm line-clamp-2 mt-2 mb-4">
-            {study.excerpt}
+            {study.excerpt ?? ""}
           </p>
           {firstMetric && (
             <div className="mb-4">

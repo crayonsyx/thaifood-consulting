@@ -1,20 +1,50 @@
 "use client";
 
-import { useMemo } from "react";
-import * as runtime from "react/jsx-runtime";
-import { mdxComponents } from "@/components/mdx";
+import { TinaMarkdown } from "tinacms/dist/rich-text";
+import type { TinaMarkdownContent } from "tinacms/dist/rich-text";
+import { Callout } from "@/components/mdx/Callout";
+import { FAQ } from "@/components/mdx/FAQ";
+import { CostBreakdown } from "@/components/mdx/CostBreakdown";
+
+const components = {
+  Callout: (props: { type?: "info" | "warning" | "tip"; children: TinaMarkdownContent }) => (
+    <Callout type={props.type}>
+      <TinaMarkdown content={props.children} />
+    </Callout>
+  ),
+  FAQ: (props: { items?: { question?: string; answer?: string }[] }) => (
+    <FAQ
+      items={
+        props.items
+          ?.filter((item): item is { question: string; answer: string } =>
+            Boolean(item?.question && item?.answer)
+          ) ?? []
+      }
+    />
+  ),
+  CostBreakdown: (props: {
+    items?: { category?: string; low?: string; high?: string; notes?: string }[];
+  }) => (
+    <CostBreakdown
+      items={
+        props.items
+          ?.filter(
+            (item): item is { category: string; low: string; high: string; notes?: string } =>
+              Boolean(item?.category && item?.low && item?.high)
+          ) ?? []
+      }
+    />
+  ),
+};
 
 interface CaseStudyContentProps {
-  code: string;
+  content: TinaMarkdownContent;
 }
 
-export default function CaseStudyContent({ code }: CaseStudyContentProps) {
-  const content = useMemo(() => {
-    const fn = new Function(code);
-    const mdxModule = fn({ ...runtime });
-    const Component = mdxModule.default;
-    return <Component components={mdxComponents} />;
-  }, [code]);
-
-  return <div className="prose prose-lg max-w-none">{content}</div>;
+export default function CaseStudyContent({ content }: CaseStudyContentProps) {
+  return (
+    <div className="prose prose-lg max-w-none">
+      <TinaMarkdown content={content} components={components} />
+    </div>
+  );
 }

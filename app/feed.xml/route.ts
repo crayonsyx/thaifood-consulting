@@ -1,16 +1,17 @@
 import { siteConfig } from "@/lib/constants";
+import { getPublishedPosts } from "@/lib/content";
 
 export async function GET() {
-  let posts: { title: string; slug: string; date: string; excerpt: string; published: boolean }[] = [];
+  let posts: { title: string; slug: string; date: string; excerpt: string | null }[] = [];
 
   try {
-    const content = await import("#site/content");
-    posts = content.blogs
-      .filter((p: { published: boolean }) => p.published)
-      .sort(
-        (a: { date: string }, b: { date: string }) =>
-          new Date(b.date).getTime() - new Date(a.date).getTime()
-      );
+    const allPosts = await getPublishedPosts();
+    posts = allPosts.map((p) => ({
+      title: p.title,
+      slug: p.slug,
+      date: p.date,
+      excerpt: p.excerpt ?? null,
+    }));
   } catch {
     // Content not yet built
   }
@@ -30,7 +31,7 @@ export async function GET() {
       <title><![CDATA[${post.title}]]></title>
       <link>${siteConfig.url}/blog/${post.slug}</link>
       <guid isPermaLink="true">${siteConfig.url}/blog/${post.slug}</guid>
-      <description><![CDATA[${post.excerpt}]]></description>
+      <description><![CDATA[${post.excerpt || ""}]]></description>
       <pubDate>${new Date(post.date).toUTCString()}</pubDate>
     </item>`
       )

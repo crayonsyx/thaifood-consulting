@@ -6,7 +6,8 @@ Professional F&B consulting website for Penny, a Michelin-starred consultant bas
 ## Tech Stack
 - **Framework**: Next.js 15 (App Router)
 - **Styling**: Tailwind CSS v4 (dark theme)
-- **Content**: MDX via Velite (type-safe content at build time)
+- **Content**: MDX via Velite (type-safe content at build time) — planned migration to TinaCMS
+- **Build**: `velite build && next build` (Velite runs first to generate content data)
 - **Icons**: lucide-react
 - **Forms**: Web3Forms (free tier, 250 submissions/month)
 - **Analytics**: GA4 (placeholder ID — configure after business registration)
@@ -81,7 +82,7 @@ lib/
 ## Commands
 ```bash
 npm run dev      # Development server
-npm run build    # Production build
+npm run build    # velite build && next build (content generation + Next.js)
 npm run start    # Production server
 npm run lint     # ESLint
 ```
@@ -117,7 +118,8 @@ npm run lint     # ESLint
 - Sitemap, robots.txt, RSS feed, OG image generation
 
 ## What's Pending
-- **TinaCMS integration** — self-hosted on Vercel (free, git-backed), replaces Velite as content layer, adds `/admin` visual editor
+- **Blog prose styling** — improve h2/h3 sizing, code blocks, blockquotes, tables in `app/globals.css`
+- **TinaCMS integration** — self-hosted on Vercel (free, git-backed), replaces Velite as content layer, adds `/admin` visual editor for Penny to edit content directly
 - Replace Unsplash placeholders with real photography (via `lib/images.ts`)
 - Set up GA4 measurement ID after business registration
 - Domain purchase and Vercel configuration
@@ -127,6 +129,11 @@ npm run lint     # ESLint
 - Programmatic location pages (`/consulting/[service]/[location]/`)
 - Additional blog posts (content calendar: 2/month)
 - Brand name decision (currently "ThaiFood Consulting" placeholder)
+
+## Content Management
+- **Notion content database**: All blog posts, website copy, and services documented in Notion for easy editing
+- **Notion project page**: 300b2024-75c1-8183-ab5f-f17da1a419c4
+- **Notion API key**: stored in .env.local (do not commit)
 
 ## Last Updated
 2026-02-07

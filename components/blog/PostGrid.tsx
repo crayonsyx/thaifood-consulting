@@ -8,7 +8,8 @@ interface Post {
   category: string;
   coverImage?: string;
   coverImageAlt?: string;
-  body: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  body: any;
 }
 
 interface PostGridProps {
