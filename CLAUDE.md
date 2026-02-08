@@ -151,19 +151,25 @@ npm run lint     # ESLint
 - **API route inlined** — `pages/api/tina/[...routes].ts` uses next-auth directly with `require()` (static imports crash due to ESM/CJS interop in Pages API routes)
 - **Admin assets committed** — 34 files in `public/admin/` (previously gitignored)
 
-## Vercel Deployment Status (2026-02-08)
-- **LIVE**: Site deployed and admin API working
+## Vercel Deployment Status (2026-02-09)
+- **LIVE**: Site deployed, admin API + auth working
 - All public pages return 200 (blog, case studies, homepage, etc.)
 - Blog listing shows all 10 posts, individual posts render fully
 - `/api/tina/gql` returns 401 for unauthenticated requests (correct)
 - `/api/tina/auth/csrf` returns CSRF token (auth working)
-- Admin panel loads at `/admin/index.html`
+- **Admin login works** — `admin` / `changeme123` at `/admin/index.html`
 - Listing pages use `force-dynamic` + `loading.tsx` skeletons
 - Detail pages (`[slug]`) use ISR with `revalidate=60`
+- Blog prose styling improved (heading sizes, spacing, blockquotes, code blocks, lists)
+
+## Auth Fix Details (2026-02-09)
+- Root cause: `tinacms-gitprovider-github` ships unbundled ESM (`import` statements) in `dist/index.js` despite `type: commonjs`
+- Pages Router API routes run in CJS context, so the ESM package fails to load
+- This caused `databaseClient` to be `undefined`, making `authenticate()` silently fail
+- Fix: Added `transpilePackages: ["tinacms-gitprovider-github"]` in `next.config.ts`
+- Also switched `databaseClient` import from `require().default` to lazy `import()` in `pages/api/tina/[...routes].ts`
 
 ## What's Pending
-- **Test admin panel login** — visit `/admin/index.html`, login with `admin` / `changeme123`
-- **Blog prose styling** — improve h2/h3 sizing, code blocks, blockquotes, tables in `app/globals.css`
 - Replace Unsplash placeholders with real photography (via `lib/images.ts`)
 - Set up GA4 measurement ID after business registration
 - Domain purchase and Vercel configuration
@@ -181,4 +187,4 @@ npm run lint     # ESLint
 - **GitHub repo**: https://github.com/crayonsyx/thaifood-consulting (main branch, feature/tinacms merged)
 
 ## Last Updated
-2026-02-08
+2026-02-09
