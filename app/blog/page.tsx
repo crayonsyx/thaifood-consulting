@@ -1,22 +1,49 @@
-"use client";
+import type { Metadata } from "next";
+import { getPublishedPosts } from "@/lib/content";
 
-import { useState } from "react";
-import { blogs } from "#site/content";
-import { getSortedPosts, getPostsByCategory } from "@/lib/content";
-import { categories } from "@/lib/constants";
-import PostGrid from "@/components/blog/PostGrid";
+export const revalidate = 300;
+import { siteConfig } from "@/lib/constants";
+import { breadcrumbSchema } from "@/lib/seo";
+import JsonLd from "@/components/shared/JsonLd";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BlogListClient from "./BlogListClient";
 
-export default function BlogPage() {
-  const [activeCategory, setActiveCategory] = useState("all");
+export const metadata: Metadata = {
+  title: "Blog | Insights & Guides",
+  description:
+    "Practical advice on opening and running restaurants in Thailand, from a consultant who has done it at the highest level.",
+  openGraph: {
+    title: `Blog | ${siteConfig.name}`,
+    description:
+      "Practical advice on opening and running restaurants in Thailand.",
+    url: `${siteConfig.url}/blog`,
+  },
+};
 
-  const posts =
-    activeCategory === "all"
-      ? getSortedPosts(blogs)
-      : getPostsByCategory(blogs, activeCategory);
+export default async function BlogPage() {
+  const posts = await getPublishedPosts();
+
+  // Serialize posts for client component (strip rich-text body, keep what's needed)
+  const serializedPosts = posts.map((post) => ({
+    title: post.title,
+    slug: post.slug,
+    date: post.date,
+    excerpt: post.excerpt ?? "",
+    category: post.category ?? "",
+    coverImage: post.coverImage ?? undefined,
+    coverImageAlt: post.coverImageAlt ?? undefined,
+    body: post.body,
+  }));
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: siteConfig.url },
+          { name: "Blog", url: `${siteConfig.url}/blog` },
+        ])}
+      />
+
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6">
           <Breadcrumbs
@@ -36,25 +63,7 @@ export default function BlogPage() {
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-3 mb-12 animate-fade-in-up animation-delay-100">
-            {categories.map((cat) => (
-              <button
-                key={cat.slug}
-                onClick={() => setActiveCategory(cat.slug)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
-                  activeCategory === cat.slug
-                    ? "bg-accent-gold text-background"
-                    : "border border-border text-foreground-muted hover:border-accent-gold hover:text-accent-gold"
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
-
-          <div className="animate-fade-in-up animation-delay-200">
-            <PostGrid posts={posts} />
-          </div>
+          <BlogListClient posts={serializedPosts} />
         </div>
       </section>
     </>

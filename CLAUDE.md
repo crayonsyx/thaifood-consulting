@@ -6,12 +6,15 @@ Professional F&B consulting website for Penny, a Michelin-starred consultant bas
 ## Tech Stack
 - **Framework**: Next.js 15 (App Router)
 - **Styling**: Tailwind CSS v4 (dark theme)
-- **Content**: MDX via Velite (type-safe content at build time)
+- **Content**: TinaCMS (self-hosted, git-backed) with visual editor at `/admin`
+- **Build**: `tinacms build && next build` (TinaCMS GraphQL codegen, then Next.js build)
 - **Icons**: lucide-react
 - **Forms**: Web3Forms (free tier, 250 submissions/month)
 - **Analytics**: GA4 (placeholder ID — configure after business registration)
 - **Hosting**: Vercel (free tier)
 - **Images**: Unsplash placeholders, centralized in `lib/images.ts`
+- **CMS Backend**: Upstash Redis (KV store for TinaCMS database adapter)
+- **CMS Auth**: Auth.js (self-hosted, username/password)
 
 ## Design System
 - Dark palette: `#0a0a0a` primary bg, `#1a1a1a` secondary, `#141414` cards
@@ -54,16 +57,34 @@ lib/
   images.ts     # Centralized image registry (change here to swap placeholders)
   services.ts   # Services data (4 services with full content)
   seo.ts        # JSON-LD schema generators
-  content.ts    # Content query helpers for Velite collections
+  content.ts    # TinaCMS GraphQL query helpers (server-side only)
   analytics.ts  # GA4 event tracking functions
+
+tina/
+  config.ts       # TinaCMS schema, collections, auth config
+  database.ts     # Database adapter (Redis prod, LevelDB dev)
+  __generated__/  # Auto-generated GraphQL client & types (gitignored)
+
+pages/
+  api/tina/[...routes].ts  # TinaCMS GraphQL API endpoint
 ```
 
 ## Content Workflow
+
+### Option 1: TinaCMS Admin (Recommended for Penny)
+1. Visit `/admin` on the live site or local dev
+2. Log in with admin credentials
+3. Click "Blog Posts" or "Case Studies" in sidebar
+4. Create new or edit existing content with rich-text editor
+5. Click "Save" — commits directly to GitHub
+6. Vercel auto-deploys; ISR revalidates pages within 5 minutes
+
+### Option 2: Manual MDX Editing
 1. Create new `.mdx` file in `content/blog/` or `content/case-studies/`
-2. Add frontmatter (see existing posts for schema)
+2. Add frontmatter (see `tina/config.ts` for schema)
 3. Write content using MDX + custom components (Callout, FAQ, CostBreakdown)
 4. Commit and push — Vercel auto-deploys
-5. Sitemap and RSS auto-update
+5. Sitemap and RSS auto-update (ISR revalidates every 5 minutes)
 
 ## Key Files
 - **Image swapping**: Edit `lib/images.ts` — all components reference this file
@@ -77,11 +98,17 @@ lib/
 | `NEXT_PUBLIC_WEB3FORMS_KEY` | Contact form submission | Configured |
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Google Analytics 4 | Placeholder (G-XXXXXXXXXX) |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | WhatsApp CTA link | Configured |
+| `GITHUB_PERSONAL_ACCESS_TOKEN` | TinaCMS git provider (commits from admin) | Configured (Vercel) |
+| `GITHUB_OWNER` | GitHub repo owner | Configured (Vercel) |
+| `GITHUB_REPO` | GitHub repo name | Configured (Vercel) |
+| `NEXTAUTH_SECRET` | Auth.js secret for admin auth | Configured (Vercel) |
+| `KV_REST_API_URL` | Upstash Redis URL (TinaCMS database) | Configured (Vercel) |
+| `KV_REST_API_TOKEN` | Upstash Redis token | Configured (Vercel) |
 
 ## Commands
 ```bash
-npm run dev      # Development server
-npm run build    # Production build
+npm run dev      # TINA_PUBLIC_IS_LOCAL=true tinacms dev -c "next dev"
+npm run build    # tinacms build && next build (GraphQL codegen + Next.js SSG)
 npm run start    # Production server
 npm run lint     # ESLint
 ```
@@ -115,9 +142,13 @@ npm run lint     # ESLint
 - WhatsApp floating button
 - All JSON-LD schemas
 - Sitemap, robots.txt, RSS feed, OG image generation
+- **TinaCMS self-hosted CMS** — visual editor at `/admin`, git-backed, Auth.js authentication
+- **ISR caching** — all CMS pages revalidate every 5 minutes (replaced force-dynamic)
+- **Velite fully removed** — replaced by TinaCMS GraphQL data layer
 
 ## What's Pending
-- **TinaCMS integration** — self-hosted on Vercel (free, git-backed), replaces Velite as content layer, adds `/admin` visual editor
+- **Blog prose styling** — improve h2/h3 sizing, code blocks, blockquotes, tables in `app/globals.css`
+- **Admin auth setup** — create initial admin user (content/users/index.json + TinaUserCollection)
 - Replace Unsplash placeholders with real photography (via `lib/images.ts`)
 - Set up GA4 measurement ID after business registration
 - Domain purchase and Vercel configuration
@@ -128,5 +159,11 @@ npm run lint     # ESLint
 - Additional blog posts (content calendar: 2/month)
 - Brand name decision (currently "ThaiFood Consulting" placeholder)
 
+## Content Management
+- **TinaCMS Admin**: Visual editor at `/admin/index.html` (production + local dev)
+- **Notion workspace**: Sabaii Brain — project docs, SEO research, content database
+- **Notion page**: https://www.notion.so/Sabaii-Brain-300b202475c180579b9ae74f426c9d75
+- **GitHub repo**: https://github.com/crayonsyx/thaifood-consulting (branch: feature/tinacms)
+
 ## Last Updated
-2026-02-07
+2026-02-08

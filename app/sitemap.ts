@@ -1,6 +1,9 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/constants";
 import { services } from "@/lib/services";
+import { getPublishedPosts, getAllCaseStudies } from "@/lib/content";
+
+export const revalidate = 300;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = siteConfig.url;
@@ -22,22 +25,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  // Dynamic content pages will be added when Velite content is available
   let blogPages: MetadataRoute.Sitemap = [];
   let caseStudyPages: MetadataRoute.Sitemap = [];
 
   try {
-    const { blogs, caseStudies } = await import("#site/content");
-    blogPages = blogs
-      .filter((p: { published: boolean }) => p.published)
-      .map((post: { slug: string; date: string }) => ({
-        url: `${baseUrl}/blog/${post.slug}`,
-        lastModified: new Date(post.date),
-        changeFrequency: "monthly" as const,
-        priority: 0.7,
-      }));
+    const posts = await getPublishedPosts();
+    blogPages = posts.map((post) => ({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: new Date(post.date),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }));
 
-    caseStudyPages = caseStudies.map((study: { slug: string; date: string }) => ({
+    const studies = await getAllCaseStudies();
+    caseStudyPages = studies.map((study) => ({
       url: `${baseUrl}/case-studies/${study.slug}`,
       lastModified: new Date(study.date),
       changeFrequency: "monthly" as const,

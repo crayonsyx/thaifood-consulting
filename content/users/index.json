@@ -1,0 +1,10 @@
+{
+  "users": [
+    {
+      "username": "admin",
+      "name": "Penny",
+      "email": "admin@thaifood-consulting.com",
+      "password": "changeme123"
+    }
+  ]
+}

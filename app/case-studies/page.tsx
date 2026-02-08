@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { caseStudies } from "#site/content";
-import { getSortedCaseStudies } from "@/lib/content";
+import { getAllCaseStudies } from "@/lib/content";
+
+export const revalidate = 300;
 import { siteConfig } from "@/lib/constants";
 import { breadcrumbSchema } from "@/lib/seo";
 import JsonLd from "@/components/shared/JsonLd";
@@ -19,8 +20,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function CaseStudiesPage() {
-  const sorted = getSortedCaseStudies(caseStudies);
+export default async function CaseStudiesPage() {
+  const sorted = await getAllCaseStudies();
 
   return (
     <>

@@ -1,64 +1,142 @@
-// Content query helpers for Velite collections
-// Velite outputs typed data to .velite/ at build time
+// Content query helpers using TinaCMS database client
+// Server-side only — do NOT import this from client components
+// For client-safe utilities, use lib/utils.ts
 
-import type { Post, CaseStudy } from "#site/content";
+import { databaseClient } from "@/tina/__generated__/databaseClient";
 
-export function getSortedPosts(posts: Post[]): Post[] {
-  return posts
-    .filter((p) => p.published)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+// Re-export client-safe utilities for convenience in server components
+export { formatDate, estimateReadingTime } from "./utils";
+
+// Simplified types matching what TinaCMS queries return
+export interface BlogPost {
+  title: string;
+  slug: string;
+  date: string;
+  excerpt?: string | null;
+  category?: string | null;
+  tags?: (string | null)[] | null;
+  coverImage?: string | null;
+  coverImageAlt?: string | null;
+  author?: string | null;
+  featured?: boolean | null;
+  published?: boolean | null;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+  } | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  body?: any;
 }
 
-export function getFeaturedPosts(posts: Post[]): Post[] {
-  return getSortedPosts(posts).filter((p) => p.featured);
+export interface CaseStudyPost {
+  title: string;
+  slug: string;
+  date: string;
+  client?: string | null;
+  industry: string;
+  excerpt?: string | null;
+  coverImage?: string | null;
+  coverImageAlt?: string | null;
+  metrics?: ({
+    label?: string | null;
+    before?: string | null;
+    after?: string | null;
+  } | null)[] | null;
+  testimonial?: {
+    quote?: string | null;
+    author?: string | null;
+    role?: string | null;
+  } | null;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+  } | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  body?: any;
 }
 
-export function getPostsByCategory(posts: Post[], category: string): Post[] {
-  if (category === "all") return getSortedPosts(posts);
-  return getSortedPosts(posts).filter((p) => p.category === category);
+// --- Blog Queries ---
+
+export async function getAllPosts(): Promise<BlogPost[]> {
+  const result = await databaseClient.queries.blogConnection({
+    sort: "date",
+    last: 100,
+  });
+
+  const posts =
+    result.data.blogConnection.edges
+      ?.map((edge) => edge?.node)
+      .filter((node) => node != null) ?? [];
+
+  // Sort descending (TinaCMS sorts ascending)
+  return (posts as BlogPost[]).reverse();
 }
 
-export function getPostBySlug(
-  posts: Post[],
+export async function getPublishedPosts(): Promise<BlogPost[]> {
+  const posts = await getAllPosts();
+  return posts.filter((p) => p.published !== false);
+}
+
+export async function getFeaturedPosts(): Promise<BlogPost[]> {
+  const posts = await getPublishedPosts();
+  return posts.filter((p) => p.featured === true);
+}
+
+export async function getPostsByCategory(category: string): Promise<BlogPost[]> {
+  if (category === "all") return getPublishedPosts();
+  const posts = await getPublishedPosts();
+  return posts.filter((p) => p.category === category);
+}
+
+export async function getPostBySlug(
   slug: string
-): Post | undefined {
-  return posts.find((p) => p.slug === slug);
+): Promise<BlogPost | undefined> {
+  try {
+    const result = await databaseClient.queries.blog({
+      relativePath: `${slug}.mdx`,
+    });
+    return result.data.blog as BlogPost;
+  } catch {
+    return undefined;
+  }
 }
 
-export function getRelatedPosts(
-  posts: Post[],
+export async function getRelatedPosts(
   currentSlug: string,
   category: string,
   limit = 3
-): Post[] {
-  return getSortedPosts(posts)
+): Promise<BlogPost[]> {
+  const posts = await getPublishedPosts();
+  return posts
     .filter((p) => p.slug !== currentSlug && p.category === category)
     .slice(0, limit);
 }
 
-export function getSortedCaseStudies(studies: CaseStudy[]): CaseStudy[] {
-  return studies.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
-}
+// --- Case Study Queries ---
 
-export function getCaseStudyBySlug(
-  studies: CaseStudy[],
-  slug: string
-): CaseStudy | undefined {
-  return studies.find((s) => s.slug === slug);
-}
-
-export function formatDate(dateString: string): string {
-  return new Date(dateString).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+export async function getAllCaseStudies(): Promise<CaseStudyPost[]> {
+  const result = await databaseClient.queries.caseStudyConnection({
+    sort: "date",
+    last: 100,
   });
+
+  const studies =
+    result.data.caseStudyConnection.edges
+      ?.map((edge) => edge?.node)
+      .filter((node) => node != null) ?? [];
+
+  return (studies as CaseStudyPost[]).reverse();
 }
 
-export function estimateReadingTime(content: string): number {
-  const wordsPerMinute = 200;
-  const words = content.split(/\s+/).length;
-  return Math.max(1, Math.ceil(words / wordsPerMinute));
+export async function getCaseStudyBySlug(
+  slug: string
+): Promise<CaseStudyPost | undefined> {
+  try {
+    const result = await databaseClient.queries.caseStudy({
+      relativePath: `${slug}.mdx`,
+    });
+    return result.data.caseStudy as CaseStudyPost;
+  } catch {
+    return undefined;
+  }
 }

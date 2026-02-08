@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { formatDate, estimateReadingTime } from "@/lib/content";
+import { formatDate, estimateReadingTime } from "@/lib/utils";
 import { images } from "@/lib/images";
 
 interface PostCardProps {
@@ -12,7 +12,8 @@ interface PostCardProps {
     category: string;
     coverImage?: string;
     coverImageAlt?: string;
-    body: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    body: any;
   };
 }
 
