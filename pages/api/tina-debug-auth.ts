@@ -2,14 +2,28 @@
 // TEMPORARY debug endpoint — remove after fixing auth
 import type { NextApiRequest, NextApiResponse } from "next";
 
-const databaseClient =
-  require("../../tina/__generated__/databaseClient").default;
+const mod = require("../../tina/__generated__/databaseClient");
+const databaseClient = mod.default || mod.databaseClient || mod;
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
+    // First, log what we got from the module
+    console.log("[debug-auth] module keys:", Object.keys(mod));
+    console.log("[debug-auth] databaseClient keys:", Object.keys(databaseClient || {}));
+    console.log("[debug-auth] has authenticate:", typeof databaseClient?.authenticate);
+
+    if (!databaseClient?.authenticate) {
+      return res.status(500).json({
+        error: "databaseClient.authenticate not found",
+        moduleKeys: Object.keys(mod),
+        clientKeys: Object.keys(databaseClient || {}),
+        clientType: typeof databaseClient,
+      });
+    }
+
     console.log("[debug-auth] calling databaseClient.authenticate...");
     const result = await databaseClient.authenticate({
       username: "admin",
