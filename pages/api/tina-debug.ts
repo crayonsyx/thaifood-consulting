@@ -1,71 +1,97 @@
+import { TinaNodeBackend, LocalBackendAuthProvider } from "@tinacms/datalayer";
+import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { getServerSession } from "next-auth/next";
+import databaseClient from "../../tina/__generated__/databaseClient";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-// Test each import individually to find which one crashes
-const imports: Record<string, string> = {};
+const results: Record<string, string> = {};
 
+// Test 1: Build auth options (same as real route)
 try {
-  require("@tinacms/datalayer");
-  imports["@tinacms/datalayer"] = "OK";
+  const credentialsProvider = CredentialsProvider({
+    credentials: {
+      username: { label: "Username", type: "text" },
+      password: { label: "Password", type: "password" },
+    },
+    authorize: async (credentials) => {
+      const result = await databaseClient.authenticate({
+        username: credentials!.username,
+        password: credentials!.password,
+      });
+      return result.data?.authenticate || null;
+    },
+  });
+  results["CredentialsProvider"] = "OK";
 } catch (e: any) {
-  imports["@tinacms/datalayer"] = e.message;
+  results["CredentialsProvider"] = e.message;
 }
 
+// Test 2: Build TinaNodeBackend with local auth
 try {
-  require("next-auth");
-  imports["next-auth"] = "OK";
+  const localHandler = TinaNodeBackend({
+    authProvider: LocalBackendAuthProvider(),
+    databaseClient,
+  });
+  results["TinaNodeBackend(local)"] = typeof localHandler;
 } catch (e: any) {
-  imports["next-auth"] = e.message;
+  results["TinaNodeBackend(local)"] = e.message;
 }
 
+// Test 3: Build auth provider (same as real route)
 try {
-  require("next-auth/providers/credentials");
-  imports["next-auth/providers/credentials"] = "OK";
+  const secret = process.env.NEXTAUTH_SECRET || "test-secret";
+  const credProv = CredentialsProvider({
+    credentials: {
+      username: { label: "Username", type: "text" },
+      password: { label: "Password", type: "password" },
+    },
+    authorize: async () => null,
+  });
+
+  const authOptions = {
+    callbacks: {
+      jwt: async ({ token: jwt, account }: any) => jwt,
+      session: async ({ session, token: jwt }: any) => session,
+    },
+    session: { strategy: "jwt" as const },
+    secret,
+    providers: [credProv],
+  };
+
+  const authProvider = {
+    initialize: async () => {},
+    isAuthorized: async (req: any, res: any) => {
+      return { isAuthorized: false as const, errorCode: 401, errorMessage: "test" };
+    },
+    extraRoutes: {
+      auth: {
+        secure: false,
+        handler: async (req: any, res: any, opts: any) => {},
+      },
+    },
+  };
+
+  results["authProvider"] = "OK";
+
+  // Test 4: Build TinaNodeBackend with custom auth
+  const handler = TinaNodeBackend({
+    authProvider,
+    databaseClient,
+  });
+  results["TinaNodeBackend(custom)"] = typeof handler;
 } catch (e: any) {
-  imports["next-auth/providers/credentials"] = e.message;
+  results["TinaNodeBackend(custom)"] = e.message + "\n" + e.stack;
 }
 
-try {
-  require("next-auth/next");
-  imports["next-auth/next"] = "OK";
-} catch (e: any) {
-  imports["next-auth/next"] = e.message;
-}
-
-try {
-  require("../../tina/__generated__/databaseClient");
-  imports["databaseClient"] = "OK";
-} catch (e: any) {
-  imports["databaseClient"] = e.message;
-}
-
-try {
-  require("../../tina/database");
-  imports["tina/database"] = "OK";
-} catch (e: any) {
-  imports["tina/database"] = e.message;
-}
-
-try {
-  require("upstash-redis-level");
-  imports["upstash-redis-level"] = "OK";
-} catch (e: any) {
-  imports["upstash-redis-level"] = e.message;
-}
-
-try {
-  require("tinacms-gitprovider-github");
-  imports["tinacms-gitprovider-github"] = "OK";
-} catch (e: any) {
-  imports["tinacms-gitprovider-github"] = e.message;
-}
-
-try {
-  require("@upstash/redis");
-  imports["@upstash/redis"] = "OK";
-} catch (e: any) {
-  imports["@upstash/redis"] = e.message;
-}
+// Test 5: env vars
+results["NEXTAUTH_SECRET"] = process.env.NEXTAUTH_SECRET ? "set" : "MISSING";
+results["KV_REST_API_URL"] = process.env.KV_REST_API_URL ? "set" : "MISSING";
+results["KV_REST_API_TOKEN"] = process.env.KV_REST_API_TOKEN ? "set" : "MISSING";
+results["GITHUB_PERSONAL_ACCESS_TOKEN"] = process.env.GITHUB_PERSONAL_ACCESS_TOKEN ? "set" : "MISSING";
+results["GITHUB_OWNER"] = process.env.GITHUB_OWNER ? "set" : "MISSING";
+results["GITHUB_REPO"] = process.env.GITHUB_REPO ? "set" : "MISSING";
 
 export default function handler(_req: NextApiRequest, res: NextApiResponse) {
-  res.status(200).json({ imports });
+  res.status(200).json(results);
 }
