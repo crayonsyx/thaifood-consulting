@@ -1,9 +1,16 @@
-import { TinaNodeBackend, LocalBackendAuthProvider } from "@tinacms/datalayer";
-import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import { getServerSession } from "next-auth/next";
-import databaseClient from "../../../tina/__generated__/databaseClient";
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-require-imports */
+// Use require() instead of import for ESM packages (@tinacms/datalayer has
+// "type": "module") — static imports crash in Pages API routes (CJS context)
+// on Vercel's serverless runtime. require() bypasses the bundler's static
+// ESM→CJS interop which is the root cause of the crash.
+
 import type { NextApiRequest, NextApiResponse } from "next";
+
+const { TinaNodeBackend, LocalBackendAuthProvider } = require("@tinacms/datalayer");
+const NextAuth = require("next-auth").default;
+const CredentialsProvider = require("next-auth/providers/credentials").default;
+const { getServerSession } = require("next-auth/next");
+const databaseClient = require("../../../tina/__generated__/databaseClient").default;
 
 const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
 
@@ -19,7 +26,7 @@ function buildAuthOptions(secret: string) {
       username: { label: "Username", type: "text" },
       password: { label: "Password", type: "password" },
     },
-    authorize: async (credentials) => {
+    authorize: async (credentials: any) => {
       try {
         const result = await databaseClient.authenticate({
           username: credentials!.username,
@@ -36,17 +43,14 @@ function buildAuthOptions(secret: string) {
 
   return {
     callbacks: {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       jwt: async ({ token: jwt, account }: any) => {
         if (account) {
           try {
             if (jwt?.sub) {
               const result = await databaseClient.authorize({ sub: jwt.sub });
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              jwt.role = !!(result as any).data?.authorize ? "user" : "guest";
+              jwt.role = !!result.data?.authorize ? "user" : "guest";
               jwt.passwordChangeRequired =
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                (result as any).data?.authorize?._password
+                result.data?.authorize?._password
                   ?.passwordChangeRequired || false;
             }
           } catch (error) {
@@ -58,7 +62,6 @@ function buildAuthOptions(secret: string) {
         }
         return jwt;
       },
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       session: async ({ session, token: jwt }: any) => {
         session.user.role = jwt.role;
         session.user.passwordChangeRequired = jwt.passwordChangeRequired;
@@ -72,11 +75,9 @@ function buildAuthOptions(secret: string) {
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function buildAuthProvider(authOptions: any) {
   return {
     initialize: async () => {},
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     isAuthorized: async (req: any, res: any) => {
       const session = await getServerSession(req, res, authOptions);
       if (!req.session) {
@@ -85,16 +86,14 @@ function buildAuthProvider(authOptions: any) {
           writable: false,
         });
       }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      if (!(session as any)?.user) {
+      if (!session?.user) {
         return {
           errorCode: 401,
           errorMessage: "Unauthorized",
           isAuthorized: false as const,
         };
       }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      if ((session as any)?.user?.role !== "user") {
+      if (session?.user?.role !== "user") {
         return {
           errorCode: 403,
           errorMessage: "Forbidden",
@@ -106,7 +105,6 @@ function buildAuthProvider(authOptions: any) {
     extraRoutes: {
       auth: {
         secure: false,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         handler: async (req: any, res: any, opts: any) => {
           const url = new URL(
             req.url,
