@@ -29,7 +29,7 @@ export function Callout({ type = "info", children }: CalloutProps) {
 
   return (
     <div
-      className={`bg-background-secondary p-4 rounded-r-lg border-l-4 ${borderColor} my-6`}
+      className={`bg-background-secondary px-5 py-4 rounded-r-lg border-l-4 ${borderColor} my-6`}
     >
       <div className="flex gap-3">
         <Icon className={`w-5 h-5 ${iconColor} flex-shrink-0 mt-0.5`} />

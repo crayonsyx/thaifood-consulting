@@ -40,7 +40,7 @@ export function FAQ({ items }: FAQProps) {
               openIndex === index ? "max-h-96 pb-4" : "max-h-0"
             }`}
           >
-            <p className="text-foreground-muted text-sm leading-relaxed">
+            <p className="text-foreground-muted text-base leading-relaxed">
               {item.answer}
             </p>
           </div>

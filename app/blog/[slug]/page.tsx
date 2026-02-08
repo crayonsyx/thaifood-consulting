@@ -125,7 +125,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <span className="text-accent-gold uppercase text-xs tracking-wider font-medium">
               {(post.category ?? "").replace(/-/g, " ")}
             </span>
-            <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl text-foreground mt-3 mb-4 leading-tight">
+            <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl text-foreground mt-4 mb-6 leading-tight">
               {post.title}
             </h1>
             <div className="flex items-center gap-3 text-foreground-subtle text-sm mb-6">
@@ -149,7 +149,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
 
           {/* MDX content */}
-          <div className="prose max-w-none animate-fade-in-up animation-delay-200">
+          <div className="prose prose-lg max-w-none animate-fade-in-up animation-delay-200">
             <MDXContent content={post.body} />
           </div>
 
