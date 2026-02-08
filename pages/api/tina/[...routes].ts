@@ -1,81 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-require-imports */
-// Use require() instead of import for ESM packages (@tinacms/datalayer has
-// "type": "module") — static imports crash in Pages API routes (CJS context)
-// on Vercel's serverless runtime. require() bypasses the bundler's static
-// ESM→CJS interop which is the root cause of the crash.
+// TinaCMS backend API route. Handles GraphQL queries and proxied auth routes
+// at /api/tina/*. Uses require() to avoid ESM/CJS interop crashes on Vercel.
 
 import type { NextApiRequest, NextApiResponse } from "next";
+import { buildAuthOptions } from "../../../lib/tina-auth";
 
-const { TinaNodeBackend, LocalBackendAuthProvider } = require("@tinacms/datalayer");
+const { TinaNodeBackend, LocalBackendAuthProvider } =
+  require("@tinacms/datalayer");
 const NextAuth = require("next-auth").default;
-const CredentialsProvider = require("next-auth/providers/credentials").default;
 const { getServerSession } = require("next-auth/next");
-const databaseClient = require("../../../tina/__generated__/databaseClient").default;
+const databaseClient =
+  require("../../../tina/__generated__/databaseClient").default;
 
 const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
 
-const TINA_CREDENTIALS_PROVIDER_NAME = "TinaCredentials";
+const authOptions = buildAuthOptions(
+  process.env.NEXTAUTH_SECRET!,
+  databaseClient
+);
 
-// Inline auth logic from tinacms-authjs to avoid importing tinacms UI package
-// (tinacms-authjs bundles tinacms which imports color-string with ESM named
-// imports from a CJS module, crashing on Vercel's Node runtime)
-
-function buildAuthOptions(secret: string) {
-  const credentialsProvider = CredentialsProvider({
-    credentials: {
-      username: { label: "Username", type: "text" },
-      password: { label: "Password", type: "password" },
-    },
-    authorize: async (credentials: any) => {
-      try {
-        const result = await databaseClient.authenticate({
-          username: credentials!.username,
-          password: credentials!.password,
-        });
-        return result.data?.authenticate || null;
-      } catch (e) {
-        console.error(e);
-        return null;
-      }
-    },
-  });
-  credentialsProvider.name = TINA_CREDENTIALS_PROVIDER_NAME;
-
-  return {
-    callbacks: {
-      jwt: async ({ token: jwt, account }: any) => {
-        if (account) {
-          try {
-            if (jwt?.sub) {
-              const result = await databaseClient.authorize({ sub: jwt.sub });
-              jwt.role = !!result.data?.authorize ? "user" : "guest";
-              jwt.passwordChangeRequired =
-                result.data?.authorize?._password
-                  ?.passwordChangeRequired || false;
-            }
-          } catch (error) {
-            console.log(error);
-          }
-          if (jwt.role === undefined) {
-            jwt.role = "guest";
-          }
-        }
-        return jwt;
-      },
-      session: async ({ session, token: jwt }: any) => {
-        session.user.role = jwt.role;
-        session.user.passwordChangeRequired = jwt.passwordChangeRequired;
-        session.user.sub = jwt.sub;
-        return session;
-      },
-    },
-    session: { strategy: "jwt" as const },
-    secret,
-    providers: [credentialsProvider],
-  };
-}
-
-function buildAuthProvider(authOptions: any) {
+function buildAuthProvider() {
   return {
     initialize: async () => {},
     isAuthorized: async (req: any, res: any) => {
@@ -127,9 +71,7 @@ const handler = isLocal
       databaseClient,
     })
   : TinaNodeBackend({
-      authProvider: buildAuthProvider(
-        buildAuthOptions(process.env.NEXTAUTH_SECRET!)
-      ),
+      authProvider: buildAuthProvider(),
       databaseClient,
     });
 
