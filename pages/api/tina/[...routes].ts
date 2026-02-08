@@ -136,5 +136,13 @@ const handler = isLocal
     });
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  return handler(req, res);
+  try {
+    return await handler(req, res);
+  } catch (e) {
+    console.error("TinaCMS API error:", e);
+    res.status(500).json({
+      error: e instanceof Error ? e.message : String(e),
+      stack: e instanceof Error ? e.stack : undefined,
+    });
+  }
 };
