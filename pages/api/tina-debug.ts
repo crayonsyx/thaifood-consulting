@@ -32,10 +32,38 @@ try {
 }
 
 try {
-  require("../tina/__generated__/databaseClient");
+  require("../../tina/__generated__/databaseClient");
   imports["databaseClient"] = "OK";
 } catch (e: any) {
   imports["databaseClient"] = e.message;
+}
+
+try {
+  require("../../tina/database");
+  imports["tina/database"] = "OK";
+} catch (e: any) {
+  imports["tina/database"] = e.message;
+}
+
+try {
+  require("upstash-redis-level");
+  imports["upstash-redis-level"] = "OK";
+} catch (e: any) {
+  imports["upstash-redis-level"] = e.message;
+}
+
+try {
+  require("tinacms-gitprovider-github");
+  imports["tinacms-gitprovider-github"] = "OK";
+} catch (e: any) {
+  imports["tinacms-gitprovider-github"] = e.message;
+}
+
+try {
+  require("@upstash/redis");
+  imports["@upstash/redis"] = "OK";
+} catch (e: any) {
+  imports["@upstash/redis"] = e.message;
 }
 
 export default function handler(_req: NextApiRequest, res: NextApiResponse) {
