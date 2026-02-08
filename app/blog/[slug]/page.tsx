@@ -18,7 +18,7 @@ import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import JsonLd from "@/components/shared/JsonLd";
 import CTA from "@/components/shared/CTA";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;

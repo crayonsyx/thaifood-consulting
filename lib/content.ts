@@ -2,6 +2,7 @@
 // Server-side only — do NOT import this from client components
 // For client-safe utilities, use lib/utils.ts
 
+import { cache } from "react";
 import { databaseClient } from "@/tina/__generated__/databaseClient";
 
 // Re-export client-safe utilities for convenience in server components
@@ -57,7 +58,7 @@ export interface CaseStudyPost {
 
 // --- Blog Queries ---
 
-export async function getAllPosts(): Promise<BlogPost[]> {
+export const getAllPosts = cache(async (): Promise<BlogPost[]> => {
   const result = await databaseClient.queries.blogConnection({
     sort: "date",
     last: 100,
@@ -70,7 +71,7 @@ export async function getAllPosts(): Promise<BlogPost[]> {
 
   // Sort descending (TinaCMS sorts ascending)
   return (posts as BlogPost[]).reverse();
-}
+});
 
 export async function getPublishedPosts(): Promise<BlogPost[]> {
   const posts = await getAllPosts();
@@ -88,9 +89,9 @@ export async function getPostsByCategory(category: string): Promise<BlogPost[]> 
   return posts.filter((p) => p.category === category);
 }
 
-export async function getPostBySlug(
+export const getPostBySlug = cache(async (
   slug: string
-): Promise<BlogPost | undefined> {
+): Promise<BlogPost | undefined> => {
   try {
     const result = await databaseClient.queries.blog({
       relativePath: `${slug}.mdx`,
@@ -99,7 +100,7 @@ export async function getPostBySlug(
   } catch {
     return undefined;
   }
-}
+});
 
 export async function getRelatedPosts(
   currentSlug: string,
@@ -114,7 +115,7 @@ export async function getRelatedPosts(
 
 // --- Case Study Queries ---
 
-export async function getAllCaseStudies(): Promise<CaseStudyPost[]> {
+export const getAllCaseStudies = cache(async (): Promise<CaseStudyPost[]> => {
   const result = await databaseClient.queries.caseStudyConnection({
     sort: "date",
     last: 100,
@@ -126,11 +127,11 @@ export async function getAllCaseStudies(): Promise<CaseStudyPost[]> {
       .filter((node) => node != null) ?? [];
 
   return (studies as CaseStudyPost[]).reverse();
-}
+});
 
-export async function getCaseStudyBySlug(
+export const getCaseStudyBySlug = cache(async (
   slug: string
-): Promise<CaseStudyPost | undefined> {
+): Promise<CaseStudyPost | undefined> => {
   try {
     const result = await databaseClient.queries.caseStudy({
       relativePath: `${slug}.mdx`,
@@ -139,4 +140,4 @@ export async function getCaseStudyBySlug(
   } catch {
     return undefined;
   }
-}
+});
