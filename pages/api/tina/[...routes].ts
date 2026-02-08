@@ -1,16 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-require-imports */
 // TinaCMS backend API route. Handles GraphQL queries and proxied auth routes
-// at /api/tina/*. Uses require() to avoid ESM/CJS interop crashes on Vercel.
+// at /api/tina/*. Uses require() for npm packages to avoid ESM/CJS interop crashes on Vercel.
 
 import type { NextApiRequest, NextApiResponse } from "next";
+import databaseClient from "../../../tina/__generated__/databaseClient";
 import { buildAuthOptions } from "../../../lib/tina-auth";
 
 const { TinaNodeBackend, LocalBackendAuthProvider } =
   require("@tinacms/datalayer");
 const NextAuth = require("next-auth").default;
 const { getServerSession } = require("next-auth/next");
-const databaseClient =
-  require("../../../tina/__generated__/databaseClient").default;
 
 const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
 
