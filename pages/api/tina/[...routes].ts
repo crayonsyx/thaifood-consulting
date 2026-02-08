@@ -90,7 +90,7 @@ function buildAuthProvider(authOptions: any) {
         return {
           errorCode: 401,
           errorMessage: "Unauthorized",
-          isAuthorized: false,
+          isAuthorized: false as const,
         };
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -98,10 +98,10 @@ function buildAuthProvider(authOptions: any) {
         return {
           errorCode: 403,
           errorMessage: "Forbidden",
-          isAuthorized: false,
+          isAuthorized: false as const,
         };
       }
-      return { isAuthorized: true };
+      return { isAuthorized: true as const };
     },
     extraRoutes: {
       auth: {
