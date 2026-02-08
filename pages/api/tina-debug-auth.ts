@@ -1,25 +1,27 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // TEMPORARY debug endpoint — remove after fixing auth
 import type { NextApiRequest, NextApiResponse } from "next";
-import databaseClient from "../../tina/__generated__/databaseClient";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
-    console.log("[debug-auth] databaseClient keys:", Object.keys(databaseClient || {}));
-    console.log("[debug-auth] has authenticate:", typeof (databaseClient as any)?.authenticate);
+    const mod = await import("../../tina/__generated__/databaseClient");
+    const databaseClient = mod.default || mod.databaseClient || mod;
 
-    if (!(databaseClient as any)?.authenticate) {
+    console.log("[debug-auth] module keys:", Object.keys(mod));
+    console.log("[debug-auth] databaseClient keys:", Object.keys(databaseClient || {}));
+
+    if (!databaseClient?.authenticate) {
       return res.status(500).json({
         error: "databaseClient.authenticate not found",
+        moduleKeys: Object.keys(mod),
         clientKeys: Object.keys(databaseClient || {}),
-        clientType: typeof databaseClient,
       });
     }
 
-    const result = await (databaseClient as any).authenticate({
+    const result = await databaseClient.authenticate({
       username: "admin",
       password: "changeme123",
     });
@@ -40,7 +42,7 @@ export default async function handler(
     console.error("[debug-auth] error:", e);
     res.status(500).json({
       error: e?.message,
-      stack: e?.stack?.slice(0, 500),
+      stack: e?.stack?.slice(0, 800),
     });
   }
 }
