@@ -1,5 +1,8 @@
 import { defineConfig, LocalAuthProvider } from "tinacms";
-import { UsernamePasswordAuthJSProvider } from "tinacms-authjs/dist/tinacms";
+import {
+  UsernamePasswordAuthJSProvider,
+  TinaUserCollection,
+} from "tinacms-authjs/dist/tinacms";
 
 const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
 
@@ -295,6 +298,7 @@ export default defineConfig({
           },
         ],
       },
+      TinaUserCollection,
     ],
   },
 });

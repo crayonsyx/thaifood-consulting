@@ -40,9 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# velite (legacy)
-.velite
-
 # tinacms
 /tina/__generated__
-/public/admin

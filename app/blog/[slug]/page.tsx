@@ -19,7 +19,17 @@ import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import JsonLd from "@/components/shared/JsonLd";
 import CTA from "@/components/shared/CTA";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
+
+export async function generateStaticParams() {
+  try {
+    const posts = await getPublishedPosts();
+    return posts.map((post) => ({ slug: post.slug }));
+  } catch {
+    // LevelDB may fail locally — pages will be generated on-demand via ISR
+    return [];
+  }
+}
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;

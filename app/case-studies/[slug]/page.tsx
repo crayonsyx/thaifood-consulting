@@ -12,7 +12,17 @@ import MetricsGrid from "@/components/case-studies/MetricsGrid";
 import TestimonialBlock from "@/components/case-studies/TestimonialBlock";
 import CaseStudyContent from "@/components/case-studies/CaseStudyContent";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
+
+export async function generateStaticParams() {
+  try {
+    const studies = await getAllCaseStudies();
+    return studies.map((study) => ({ slug: study.slug }));
+  } catch {
+    // LevelDB may fail locally — pages will be generated on-demand via ISR
+    return [];
+  }
+}
 
 interface PageProps {
   params: Promise<{ slug: string }>;
