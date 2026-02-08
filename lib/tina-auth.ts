@@ -16,13 +16,19 @@ export function buildAuthOptions(secret: string, databaseClient: any) {
     },
     authorize: async (credentials: any) => {
       try {
+        console.log("[tina-auth] authorize called for:", credentials?.username);
         const result = await databaseClient.authenticate({
           username: credentials!.username,
           password: credentials!.password,
         });
-        return result.data?.authenticate || null;
-      } catch (e) {
-        console.error(e);
+        console.log("[tina-auth] authenticate result keys:", Object.keys(result || {}));
+        console.log("[tina-auth] result.data:", JSON.stringify(result?.data)?.slice(0, 500));
+        console.log("[tina-auth] result.errors:", JSON.stringify(result?.errors)?.slice(0, 500));
+        const user = result.data?.authenticate || null;
+        console.log("[tina-auth] resolved user:", JSON.stringify(user)?.slice(0, 300));
+        return user;
+      } catch (e: any) {
+        console.error("[tina-auth] authorize error:", e?.message, e?.stack?.slice(0, 500));
         return null;
       }
     },
