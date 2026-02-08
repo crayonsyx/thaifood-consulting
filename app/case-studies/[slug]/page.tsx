@@ -12,7 +12,7 @@ import MetricsGrid from "@/components/case-studies/MetricsGrid";
 import TestimonialBlock from "@/components/case-studies/TestimonialBlock";
 import CaseStudyContent from "@/components/case-studies/CaseStudyContent";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 interface PageProps {
   params: Promise<{ slug: string }>;

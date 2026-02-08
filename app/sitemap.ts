@@ -3,7 +3,7 @@ import { siteConfig } from "@/lib/constants";
 import { services } from "@/lib/services";
 import { getPublishedPosts, getAllCaseStudies } from "@/lib/content";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = siteConfig.url;
