@@ -139,8 +139,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   } catch (e) {
     console.error("TinaCMS API error:", e);
     res.status(500).json({
-      error: e instanceof Error ? e.message : String(e),
-      stack: e instanceof Error ? e.stack : undefined,
+      error: e instanceof Error ? e.message : "Internal Server Error",
     });
   }
 };

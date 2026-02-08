@@ -143,12 +143,27 @@ npm run lint     # ESLint
 - All JSON-LD schemas
 - Sitemap, robots.txt, RSS feed, OG image generation
 - **TinaCMS self-hosted CMS** — visual editor at `/admin`, git-backed, Auth.js authentication
-- **ISR caching** — all CMS pages revalidate every 5 minutes (replaced force-dynamic)
+- **Hybrid rendering** — listing pages use `force-dynamic` (ISR causes build timeout), detail pages use ISR (`revalidate=60`)
+- **Loading skeletons** — `loading.tsx` files in blog/ and case-studies/ for instant perceived load
+- **Query deduplication** — React `cache()` wraps TinaCMS queries in `lib/content.ts`
 - **Velite fully removed** — replaced by TinaCMS GraphQL data layer
+- **Admin auth seed** — `content/users/index.json` with admin user, TinaUserCollection in schema
+- **API route inlined** — `pages/api/tina/[...routes].ts` uses next-auth directly with `require()` (static imports crash due to ESM/CJS interop in Pages API routes)
+- **Admin assets committed** — 34 files in `public/admin/` (previously gitignored)
+
+## Vercel Deployment Status (2026-02-08)
+- **LIVE**: Site deployed and admin API working
+- All public pages return 200 (blog, case studies, homepage, etc.)
+- Blog listing shows all 10 posts, individual posts render fully
+- `/api/tina/gql` returns 401 for unauthenticated requests (correct)
+- `/api/tina/auth/csrf` returns CSRF token (auth working)
+- Admin panel loads at `/admin/index.html`
+- Listing pages use `force-dynamic` + `loading.tsx` skeletons
+- Detail pages (`[slug]`) use ISR with `revalidate=60`
 
 ## What's Pending
+- **Test admin panel login** — visit `/admin/index.html`, login with `admin` / `changeme123`
 - **Blog prose styling** — improve h2/h3 sizing, code blocks, blockquotes, tables in `app/globals.css`
-- **Admin auth setup** — create initial admin user (content/users/index.json + TinaUserCollection)
 - Replace Unsplash placeholders with real photography (via `lib/images.ts`)
 - Set up GA4 measurement ID after business registration
 - Domain purchase and Vercel configuration
@@ -163,7 +178,7 @@ npm run lint     # ESLint
 - **TinaCMS Admin**: Visual editor at `/admin/index.html` (production + local dev)
 - **Notion workspace**: Sabaii Brain — project docs, SEO research, content database
 - **Notion page**: https://www.notion.so/Sabaii-Brain-300b202475c180579b9ae74f426c9d75
-- **GitHub repo**: https://github.com/crayonsyx/thaifood-consulting (branch: feature/tinacms)
+- **GitHub repo**: https://github.com/crayonsyx/thaifood-consulting (main branch, feature/tinacms merged)
 
 ## Last Updated
 2026-02-08
