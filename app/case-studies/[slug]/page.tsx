@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getAllCaseStudies, getCaseStudyBySlug, formatDate } from "@/lib/content";
+import { getCaseStudyBySlug, formatDate } from "@/lib/content";
 import { siteConfig } from "@/lib/constants";
 import { articleSchema, breadcrumbSchema } from "@/lib/seo";
 import { images } from "@/lib/images";
@@ -13,16 +13,6 @@ import TestimonialBlock from "@/components/case-studies/TestimonialBlock";
 import CaseStudyContent from "@/components/case-studies/CaseStudyContent";
 
 export const revalidate = 300;
-
-export async function generateStaticParams() {
-  try {
-    const studies = await getAllCaseStudies();
-    return studies.map((study) => ({ slug: study.slug }));
-  } catch {
-    // LevelDB may fail locally — pages will be generated on-demand via ISR
-    return [];
-  }
-}
 
 interface PageProps {
   params: Promise<{ slug: string }>;
