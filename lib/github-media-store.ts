@@ -32,6 +32,7 @@ export class GitHubMediaStore implements MediaStore {
         directory: dir,
         filename,
         src: data.src,
+        thumbnails: { "75x75": data.src, "400x400": data.src, "1000x1000": data.src },
       });
     }
 
@@ -73,6 +74,7 @@ export class GitHubMediaStore implements MediaStore {
         directory,
         filename: f.filename,
         src: f.src,
+        thumbnails: { "75x75": f.src, "400x400": f.src, "1000x1000": f.src },
       })),
     ];
 
