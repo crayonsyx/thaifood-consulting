@@ -85,9 +85,9 @@ export default defineConfig({
     publicFolder: "public",
   },
   media: {
-    tina: {
-      publicFolder: "public",
-      mediaRoot: "images",
+    loadCustomStore: async () => {
+      const mod = await import("../lib/github-media-store");
+      return mod.GitHubMediaStore;
     },
   },
   schema: {
