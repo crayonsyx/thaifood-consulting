@@ -26,13 +26,14 @@ export class GitHubMediaStore implements MediaStore {
       }
 
       const data = await res.json();
+      const thumbUrl = `${window.location.origin}${data.src}`;
       uploaded.push({
         type: "file",
         id: data.path,
         directory: dir,
         filename,
         src: data.src,
-        thumbnails: { "75x75": data.src, "400x400": data.src, "1000x1000": data.src },
+        thumbnails: { "75x75": thumbUrl, "400x400": thumbUrl, "1000x1000": thumbUrl },
       });
     }
 
@@ -68,14 +69,17 @@ export class GitHubMediaStore implements MediaStore {
         directory,
         filename: name,
       })),
-      ...data.files.map((f: { filename: string; src: string }) => ({
-        type: "file" as const,
-        id: directory ? `${directory}/${f.filename}` : f.filename,
-        directory,
-        filename: f.filename,
-        src: f.src,
-        thumbnails: { "75x75": f.src, "400x400": f.src, "1000x1000": f.src },
-      })),
+      ...data.files.map((f: { filename: string; src: string }) => {
+        const thumbUrl = `${window.location.origin}${f.src}`;
+        return {
+          type: "file" as const,
+          id: directory ? `${directory}/${f.filename}` : f.filename,
+          directory,
+          filename: f.filename,
+          src: f.src,
+          thumbnails: { "75x75": thumbUrl, "400x400": thumbUrl, "1000x1000": thumbUrl },
+        };
+      }),
     ];
 
     return { items };
