@@ -5,55 +5,43 @@
 // 3. That's it — all components reference this file
 
 export const images = {
-  hero: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80",
+  hero: "/images/blog-fine-dining.jpg",
   heroAlt: "Fine dining restaurant interior with warm ambient lighting",
 
   about: {
-    portrait:
-      "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=800&q=80",
+    portrait: "/images/blog-staffing.jpg",
     portraitAlt: "Professional chef in restaurant kitchen",
-    kitchen:
-      "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1200&q=80",
+    kitchen: "/images/blog-cloud-kitchen.jpg",
     kitchenAlt: "Professional restaurant kitchen in action",
   },
 
   services: {
-    menuEngineering:
-      "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=800&q=80",
+    menuEngineering: "/images/service-menu-engineering.jpg",
     menuEngineeringAlt: "Restaurant menu and food presentation",
-    concept:
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80",
+    concept: "/images/service-concept.jpg",
     conceptAlt: "Modern restaurant interior design concept",
-    cloudKitchen:
-      "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80",
+    cloudKitchen: "/images/service-cloud-kitchen.jpg",
     cloudKitchenAlt: "Commercial kitchen setup for cloud kitchen operations",
-    feasibility:
-      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80",
+    feasibility: "/images/service-feasibility.jpg",
     feasibilityAlt: "Business planning and financial analysis documents",
   },
 
   caseStudies: {
-    italianBistro:
-      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200&q=80",
+    italianBistro: "/images/blog-menu-engineering.jpg",
     italianBistroAlt: "Italian restaurant interior with elegant decor",
-    cloudKitchen:
-      "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=1200&q=80",
+    cloudKitchen: "/images/case-study-cloud-kitchen.jpg",
     cloudKitchenAlt: "Cloud kitchen food preparation and packaging",
   },
 
   blog: {
-    defaultCover:
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&q=80",
+    defaultCover: "/images/blog-default-cover.jpg",
     defaultCoverAlt: "Beautifully plated fine dining dish",
-    openRestaurant:
-      "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1200&q=80",
+    openRestaurant: "/images/blog-open-restaurant.jpg",
     openRestaurantAlt: "Restaurant storefront with inviting entrance",
-    costBreakdown:
-      "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80",
+    costBreakdown: "/images/blog-cost-restaurant.jpg",
     costBreakdownAlt: "Financial documents and calculator for restaurant budgeting",
   },
 
-  testimonial:
-    "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80",
+  testimonial: "/images/testimonial.jpg",
   testimonialAlt: "Professional business portrait",
 } as const;

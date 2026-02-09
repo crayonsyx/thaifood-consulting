@@ -12,7 +12,7 @@ Professional F&B consulting website for Penny, a Michelin-starred consultant bas
 - **Forms**: Web3Forms (free tier, 250 submissions/month)
 - **Analytics**: GA4 (placeholder ID — configure after business registration)
 - **Hosting**: Vercel (free tier)
-- **Images**: Unsplash placeholders, centralized in `lib/images.ts`
+- **Images**: Local images in `public/images/`, centralized in `lib/images.ts`. Cover images use TinaCMS `image` type (Media Manager picker)
 - **CMS Backend**: Upstash Redis (KV store for TinaCMS database adapter)
 - **CMS Auth**: Auth.js (self-hosted, username/password)
 
@@ -161,6 +161,7 @@ npm run lint     # ESLint
 - Listing pages use `force-dynamic` + `loading.tsx` skeletons
 - Detail pages (`[slug]`) use ISR with `revalidate=60`
 - Blog prose styling improved (heading sizes, spacing, blockquotes, code blocks, lists)
+- **Images localized** — all Unsplash URLs downloaded to `public/images/`, `coverImage` switched to TinaCMS `image` type (enables Media Manager picker), `remotePatterns` removed from next.config.ts, OG images use absolute URLs
 
 ## Auth Fix Details (2026-02-09)
 - Root cause: `tinacms-gitprovider-github` ships unbundled ESM (`import` statements) in `dist/index.js` despite `type: commonjs`
@@ -170,7 +171,7 @@ npm run lint     # ESLint
 - Also switched `databaseClient` import from `require().default` to lazy `import()` in `pages/api/tina/[...routes].ts`
 
 ## What's Pending
-- Replace Unsplash placeholders with real photography (via `lib/images.ts`)
+- Replace placeholder images with real photography (via TinaCMS Media Manager or `lib/images.ts`)
 - Set up GA4 measurement ID after business registration
 - Domain purchase and Vercel configuration
 - Google Business Profile setup

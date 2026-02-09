@@ -37,7 +37,7 @@ export async function generateMetadata({
   const title = post.seo?.title || post.title;
   const description = post.seo?.description || post.excerpt || "";
   const ogImage = post.coverImage
-    ? post.coverImage
+    ? `${siteConfig.url}/${post.coverImage}`
     : `${siteConfig.url}/api/og?title=${encodeURIComponent(post.title)}`;
 
   return {

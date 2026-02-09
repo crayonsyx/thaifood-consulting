@@ -144,9 +144,8 @@ export default defineConfig({
           },
           {
             name: "coverImage",
-            label: "Cover Image URL",
-            type: "string",
-            description: "Full URL to cover image (e.g. Unsplash)",
+            label: "Cover Image",
+            type: "image",
           },
           {
             name: "coverImageAlt",
@@ -241,8 +240,8 @@ export default defineConfig({
           },
           {
             name: "coverImage",
-            label: "Cover Image URL",
-            type: "string",
+            label: "Cover Image",
+            type: "image",
           },
           {
             name: "coverImageAlt",

@@ -41,7 +41,7 @@ export async function generateMetadata({
       type: "article",
       publishedTime: study.date,
       images: study.coverImage
-        ? [{ url: study.coverImage, alt: study.coverImageAlt || study.title }]
+        ? [{ url: `${siteConfig.url}/${study.coverImage}`, alt: study.coverImageAlt || study.title }]
         : undefined,
     },
     twitter: {
