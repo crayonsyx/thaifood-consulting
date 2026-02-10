@@ -126,17 +126,31 @@ npm run lint     # ESLint
 - Homepage with 7 sections
 - About page with founder story
 - 4 service pages (Menu Engineering, Concept Development, Cloud Kitchen, Feasibility Study)
-- Blog system with MDX rendering, **10 SEO blog posts** (3000-5000 words each):
+- Blog system with MDX rendering, **20 SEO blog posts** (3000-5000 words each, 14 published + 6 scheduled):
+  **Opening a Restaurant (10):**
   1. The Complete Guide to Opening a Restaurant in Thailand (2026) — *featured*
   2. How to Open a Fine Dining Restaurant in Bangkok
   3. How to Start a Cloud Kitchen in Bangkok
   4. How to Open a Cafe in Thailand
-  5. Why Restaurants Fail in Thailand: 12 Reasons
-  6. Restaurant Staffing in Thailand: Salaries, Labor Law, Retention
-  7. How Much Does It Cost to Open a Restaurant in Bangkok?
-  8. Menu Engineering for Thai Restaurants
-  9. Can a Foreigner Own a Restaurant in Thailand?
-  10. How to Find a Restaurant Location in Bangkok
+  5. How Much Does It Cost to Open a Restaurant in Bangkok?
+  6. Can a Foreigner Own a Restaurant in Thailand?
+  7. How to Find a Restaurant Location in Bangkok
+  8. How to Open a Bar in Thailand as a Foreigner
+  9. The Complete Restaurant Licensing Checklist for Thailand (2026)
+  10. Beyond Bangkok: The 5 Best Cities to Open a Restaurant *(scheduled)*
+  **Operations (4):**
+  11. Restaurant Staffing in Thailand: Salaries, Labor Law, Retention
+  12. Why Restaurants Fail in Thailand: 12 Reasons
+  13. Thailand's New Alcohol Law: What Every Restaurant Owner Needs to Know
+  14. How to Negotiate a Restaurant Lease in Bangkok *(scheduled)*
+  **F&B Trends (3):**
+  15. 7 Restaurant Concepts That Are Working in Bangkok Right Now (2026)
+  16. What Thailand's 2026 Michelin Guide Tells Us *(scheduled)*
+  17. Foodpanda Is Gone: What Thailand's Delivery Duopoly Means *(scheduled)*
+  **Other (3):**
+  18. Menu Engineering for Thai Restaurants (operations/menu-engineering)
+  19. How to Start a Food Truck Business in Thailand *(scheduled)*
+  20. Thailand Work Permit and Visa Guide for Restaurant Owners *(scheduled)*
 - Case studies system with 2 placeholder studies
 - Contact + Free Consultation forms (Web3Forms)
 - WhatsApp floating button
@@ -154,7 +168,7 @@ npm run lint     # ESLint
 ## Vercel Deployment Status (2026-02-09)
 - **LIVE**: Site deployed, admin API + auth working
 - All public pages return 200 (blog, case studies, homepage, etc.)
-- Blog listing shows all 10 posts, individual posts render fully
+- Blog listing shows all 20 posts (14 published, 6 scheduled), individual posts render fully
 - `/api/tina/gql` returns 401 for unauthenticated requests (correct)
 - `/api/tina/auth/csrf` returns CSRF token (auth working)
 - **Admin login works** — `admin` / `changeme123` at `/admin/index.html`
@@ -170,7 +184,42 @@ npm run lint     # ESLint
 - Fix: Added `transpilePackages: ["tinacms-gitprovider-github"]` in `next.config.ts`
 - Also switched `databaseClient` import from `require().default` to lazy `import()` in `pages/api/tina/[...routes].ts`
 
+## Content Authority Plan (50 Articles)
+Target: 70 total blog posts (20 existing + 50 new) across 8 topical clusters, published at 4/month cadence over 12 months. Each article: 3,000-5,000 words, first-person Penny voice, Callout/CostBreakdown/FAQ components, 3-5 internal cross-links, CTA to relevant service page.
+
+### Clusters
+1. **Menu Engineering Deep Dive** (10 articles) — P1, fills empty category
+2. **Marketing & Customer Acquisition** (8 articles) — P1, no competitor coverage
+3. **Financial Management & Accounting** (7 articles) — P1, supports Feasibility Study service
+4. **Technology & Systems** (6 articles) — P2, high search volume
+5. **Supplier & Procurement** (4 articles) — P2, Thailand-specific advantage
+6. **Scaling & Growth** (5 articles) — P2, targets high-value clients
+7. **Crisis Management & Pivoting** (4 articles) — P2, trust-building
+8. **Thailand-Specific Data & Intelligence** (6 articles) — P1, impossible for competitors to replicate
+
+### Content Quality Pipeline
+Each article goes through this pipeline:
+1. **Research** — keyword/SERP analysis, competitive gaps
+2. **Brief** — outline, target word count, internal links, FAQs
+3. **Generate** — first draft via Claude (first-person Penny voice, Callout/CostBreakdown/FAQ components)
+4. **Humanize** — run through Humanizer skill (`~/.claude/skills/humanizer`) to remove AI-sounding patterns
+5. **Copy-Edit** — apply marketingskills `copy-editing` Seven Sweeps (clarity, voice, so-what, prove-it, specificity, emotion, zero-risk)
+6. **Review** — validate word count, internal links, frontmatter, duplicate content
+7. **Publish** — commit MDX, deploy, flip `published: true` on schedule
+
+Tools:
+- **Humanizer**: https://github.com/blader/humanizer — removes 24 AI writing patterns (significance inflation, filler, sycophantic tone, etc.)
+- **marketingskills**: https://github.com/coreyhaines31/marketingskills — 25 marketing skills for Claude Code. Key skills: `content-strategy`, `copywriting`, `copy-editing`, `seo-audit`, `programmatic-seo`, `schema-markup`
+
+### Execution
+- Write in batches of 8-10 using parallel agents
+- Download Unsplash cover images per batch
+- `npm run build` to verify after each batch
+- Commit and push (Vercel auto-deploys)
+- Flip `published: true` on schedule via TinaCMS admin
+
 ## What's Pending
+- **50 new blog articles** (content authority plan — see clusters above)
 - Replace placeholder images with real photography (via TinaCMS Media Manager or `lib/images.ts`)
 - Set up GA4 measurement ID after business registration
 - Domain purchase and Vercel configuration
@@ -178,7 +227,6 @@ npm run lint     # ESLint
 - Real case study content from Penny
 - Real testimonials with client permission
 - Programmatic location pages (`/consulting/[service]/[location]/`)
-- Additional blog posts (content calendar: 2/month)
 - Brand name decision (currently "ThaiFood Consulting" placeholder)
 
 ## Content Management
@@ -188,4 +236,4 @@ npm run lint     # ESLint
 - **GitHub repo**: https://github.com/crayonsyx/thaifood-consulting (main branch, feature/tinacms merged)
 
 ## Last Updated
-2026-02-09
+2026-02-10
