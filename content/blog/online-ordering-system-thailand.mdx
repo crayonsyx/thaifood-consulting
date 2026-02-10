@@ -1,0 +1,559 @@
+---
+title: "Direct Online Ordering for Thai Restaurants: Stop Paying 30% to Delivery Platforms"
+slug: "online-ordering-system-thailand"
+date: '2026-06-17'
+excerpt: "How to build a direct online ordering system for your restaurant in Thailand -- LINE OA, website ordering, payment integration, delivery logistics, and the real math on when direct orders beat platform commissions."
+category: "technology"
+tags:
+  - technology
+  - online-ordering
+  - delivery
+  - line-oa
+  - thailand
+coverImage: images/blog-placeholder.jpg
+coverImageAlt: "Smartphone showing a restaurant ordering interface with Thai food menu items"
+author: "penny"
+featured: false
+published: false
+seo:
+  title: "Direct Online Ordering Restaurant Thailand | Guide 2026"
+  description: "Build a direct online ordering system for your Thai restaurant. LINE OA, website ordering, PromptPay, delivery logistics, and when to stop paying 30% platform commissions."
+---
+
+A client in Sathorn showed me her monthly Grab statement last year. Revenue from the platform: 420,000 THB. Commission paid to Grab: 126,000 THB. That is 30% of her delivery revenue gone before she paid for a single ingredient, a single hour of labor, or a single baht of rent. Her net profit on those delivery orders, after food cost and packaging, was about 35,000 THB. She was working hard to make Grab profitable while barely keeping herself afloat.
+
+This is the reality for thousands of restaurants in Thailand. Delivery platforms have become a necessary part of doing business -- they bring customers, handle logistics, and provide a polished ordering experience. But their commission structures, typically 25-35% of order value, turn what should be a profitable channel into a break-even proposition for most restaurants. I covered the broader platform economics in my [delivery platform strategy guide](/blog/delivery-platform-strategy-thailand), and the conclusion there was clear: you need to be on the platforms, but you also need a channel they do not control.
+
+The alternative is direct online ordering: systems that let customers order from your restaurant without a platform middleman taking a third of the revenue. Direct ordering is not a replacement for delivery platforms -- it is a complementary channel that captures your most loyal customers at dramatically better margins.
+
+This guide covers the practical options for building a direct online ordering system for a restaurant in Thailand, from LINE Official Account ordering and website solutions to payment integration, delivery logistics, and the real math on when direct ordering makes financial sense.
+
+## Why Direct Ordering Matters for Thai Restaurants
+
+The economics are straightforward. On a 300 THB delivery order through Grab or LINE MAN:
+
+**Platform order:**
+- Revenue: 300 THB
+- Platform commission (30%): -90 THB
+- Food cost (35%): -105 THB
+- Packaging: -15 THB
+- Net contribution: 90 THB
+
+**Direct order (with own delivery):**
+- Revenue: 300 THB
+- Platform commission: 0 THB
+- Food cost (35%): -105 THB
+- Packaging: -15 THB
+- Delivery cost (Lalamove/own rider): -40 THB
+- Payment processing (1-2%): -5 THB
+- Net contribution: 135 THB
+
+That is a 50% improvement in contribution per order. Scale that across 30 delivery orders per day and you are looking at 40,500 THB per month in additional profit -- from the same food, the same kitchen, and the same customers.
+
+But the financial case is not the only reason. Direct ordering also gives you something the platforms never will: customer data. When someone orders through Grab, Grab owns that customer relationship. You do not know their name, their phone number, their order frequency, or their preferences. When someone orders directly from you, you own all of that data and can use it to build repeat business.
+
+<Callout type="info">
+Direct ordering does not mean abandoning delivery platforms. The optimal strategy for most Thai restaurants is to use platforms for customer acquisition (letting new customers discover you) while building a direct ordering channel for retention (capturing repeat customers at better margins). Think of platforms as paid marketing and direct orders as organic revenue.
+</Callout>
+
+## LINE Official Account as an Ordering Channel
+
+LINE is Thailand's dominant messaging platform with over 54 million monthly active users -- essentially the entire connected population. For Thai restaurants, LINE Official Account (LINE OA) is the most natural direct ordering channel because your customers are already on it.
+
+### Setting Up LINE OA for Ordering
+
+**Basic setup (free):**
+1. Register a LINE Official Account at manager.line.biz
+2. Set up your restaurant profile with logo, description, operating hours, and location
+3. Create a rich menu (the visual button panel at the bottom of the chat) with an "Order" button
+4. Set up auto-reply messages for common inquiries
+5. Prepare a digital menu (PDF, image gallery, or link to your website menu)
+
+The free tier of LINE OA supports up to 200 messages per month (broadcast messages, not individual chats). For most restaurants, the Light plan at 480 THB/month (5,000 messages) or Standard plan at 1,200 THB/month (unlimited messages) is sufficient.
+
+### Rich Menu Design for Ordering
+
+The rich menu is the most important element of your LINE OA ordering experience. It is the first thing customers see when they open your chat, and it determines whether they place an order or close the app.
+
+**Effective rich menu layout:**
+- **Order Now** button (largest, most prominent position)
+- **Menu** button (links to your full menu with photos and prices)
+- **Promotions** button (current deals, combo offers)
+- **Location/Hours** button
+- **Call Us** button
+- **Rewards/Points** button (if you run a loyalty program)
+
+Design the rich menu as a graphic -- not just text buttons. Use appetizing food photos and clear Thai text. Rich menu images should be 2500x1686 pixels (large) or 2500x843 pixels (small). Budget 3,000-8,000 THB for a professional designer to create the initial rich menu, or use Canva if you have basic design skills.
+
+### Manual vs. Automated Ordering
+
+**Manual ordering through LINE chat:**
+The simplest approach. Customers message your LINE OA with their order, your staff confirms and processes it manually. This works for restaurants doing fewer than 15-20 direct orders per day.
+
+**Advantages:** Zero technology cost beyond the LINE OA subscription. Personal touch -- customers chat with a real person. Flexible -- can handle custom requests, modifications, and special instructions easily.
+
+**Disadvantages:** Labor-intensive. Your staff needs to be monitoring the LINE chat during all operating hours. Order errors happen when messages are misread or lost in a busy chat stream. No automated payment collection. Difficult to scale beyond 20 orders per day.
+
+**Semi-automated ordering with LINE OA chatbot:**
+LINE OA supports auto-reply keywords and basic chatbot flows. You can set up a structured ordering flow where customers select from predefined options.
+
+For example:
+- Customer types "order" or taps the Order button
+- Chatbot replies with menu categories
+- Customer selects items through button responses
+- Chatbot confirms order and total
+- Staff reviews and confirms
+
+This requires more setup (2-4 hours of chatbot configuration) but handles 30-40 orders per day with less staff attention than full manual processing.
+
+**Fully automated ordering through LINE integration platforms:**
+Several Thai tech providers offer LINE-integrated ordering systems that turn your LINE OA into a full e-commerce channel:
+
+- **FoodStory LineShop:** An add-on from the [FoodStory POS](/blog/restaurant-pos-systems-thailand) system that creates a LINE-based ordering interface with menu browsing, cart management, payment processing, and order tracking. Integrates directly with your POS.
+- **Lineshop.co.th:** A standalone LINE shopping platform popular with smaller restaurants. Basic plans start at 590 THB/month.
+- **Custom LINE LIFF apps:** For larger operations, a custom LINE Front-end Framework (LIFF) app built by a developer provides a native-feeling ordering experience inside LINE. Development cost: 50,000-200,000 THB.
+
+<Callout type="tip">
+Start with manual LINE ordering to validate demand before investing in automation. If you consistently receive 10+ orders per day through LINE chat within the first month, that is enough volume to justify upgrading to a chatbot or integrated ordering system. Investing in automation before validating demand is a common waste of money.
+</Callout>
+
+### LINE Payment Integration
+
+LINE OA supports several payment methods:
+
+**Rabbit LINE Pay:** LINE's built-in payment system. Customers pay directly within the LINE app. Merchant registration is free; transaction fees are 2.0-2.5%. Convenient for customers but requires your business to register as a Rabbit LINE Pay merchant, which takes 2-4 weeks.
+
+**PromptPay QR:** Generate a PromptPay QR code and send it in the LINE chat. The customer scans with their banking app, pays, and sends you a screenshot of the confirmation. Simple and free (no transaction fees for standard PromptPay), though the screenshot verification step is manual.
+
+**Bank transfer:** Old school but still common in Thailand. Provide your bank account details, the customer transfers, and sends proof of payment. Manual verification required.
+
+**Cash on delivery (COD):** The customer pays the delivery rider in cash. This eliminates payment friction entirely but introduces cash handling complexity and the risk of no-shows (customer orders, then is not available for delivery).
+
+For most restaurants starting with direct ordering, PromptPay QR is the best balance of convenience, cost, and simplicity. Graduate to Rabbit LINE Pay or an integrated payment gateway once your order volume justifies the setup time.
+
+## Website Ordering Systems
+
+A website ordering page gives you a branded, searchable, shareable ordering experience that is not locked inside the LINE ecosystem. It also improves your SEO -- a "Order from [Restaurant Name]" page can capture Google searches from hungry customers.
+
+### Platform Options
+
+**Shopify + food ordering plugin:**
+Shopify is overkill for most restaurants, but if you already have a Shopify website, adding an ordering page through a plugin like OrderStation or FoodStation is straightforward. Monthly cost: Shopify plan (starting at about 900 THB/month) plus plugin (500-1,500 THB/month). Best for restaurants that also sell retail products (sauces, meal kits, merchandise).
+
+**WordPress + WooCommerce:**
+If your restaurant website runs on WordPress, WooCommerce (free) with a food ordering extension can create a functional ordering page. Extensions like RestroPress (free basic version) or WPCafe (from 2,000 THB/year) are built for restaurant ordering. Total cost: hosting (200-500 THB/month) plus domain and any premium plugins.
+
+**Advantages:** Full control over design, no transaction fees beyond payment gateway costs, and strong SEO integration.
+**Disadvantages:** Requires WordPress knowledge or a developer. Ongoing maintenance (updates, security). Not as polished a mobile experience as dedicated ordering platforms without significant customization.
+
+**Dedicated ordering SaaS platforms:**
+Several platforms specifically built for restaurant online ordering operate in Thailand:
+
+- **Wongnai Merchant:** Beyond its marketplace function, Wongnai offers direct ordering pages for merchants. The advantage is integration with the Wongnai ecosystem; the disadvantage is platform dependence.
+- **iOrder.in.th:** Thai-developed ordering platform. Creates a branded ordering page with menu management, payment processing, and delivery coordination. Plans start at around 990 THB/month.
+- **GloriaFood:** International platform with a free tier that works in Thailand. Creates a simple ordering widget you embed on your website or use as a standalone page. Free for basic ordering; premium features at about 1,500 THB/month.
+- **Oddle:** Singapore-based, active in Thailand. Clean ordering interface, good delivery logistics integration. Pricing is typically commission-based (3-5% per order) rather than subscription.
+
+**Custom-built ordering system:**
+For restaurants with specific requirements or those planning to scale to multiple locations, a custom ordering system built by a developer provides maximum flexibility. A basic custom ordering page (menu display, cart, checkout, order notification) costs 80,000-250,000 THB to develop. A full-featured system with customer accounts, order history, loyalty integration, and admin dashboard runs 250,000-600,000 THB.
+
+Custom builds only make sense for restaurants doing 50+ direct orders per day or multi-unit operators who need a unified ordering platform across locations.
+
+<CostBreakdown items={[
+  { category: "LINE OA (Light plan)", low: "480", high: "1,200", notes: "THB/month. Free tier available (200 messages)" },
+  { category: "LINE chatbot ordering setup", low: "0", high: "5,000", notes: "THB one-time. DIY or outsourced" },
+  { category: "LINE LIFF ordering app (custom)", low: "50,000", high: "200,000", notes: "THB one-time. Developer-built" },
+  { category: "WordPress + WooCommerce ordering", low: "200", high: "1,500", notes: "THB/month. Hosting + plugins" },
+  { category: "Dedicated ordering SaaS", low: "590", high: "1,500", notes: "THB/month. Or 3-5% per order" },
+  { category: "Custom ordering website", low: "80,000", high: "600,000", notes: "THB one-time. Basic to full-featured" },
+  { category: "Rich menu design", low: "3,000", high: "8,000", notes: "THB one-time. Professional graphic design" }
+]} />
+
+### Mobile-Optimized Website vs. Dedicated App
+
+Should you build a dedicated mobile app for ordering? For 95% of restaurants, the answer is no.
+
+**Why mobile-optimized website wins for most restaurants:**
+- No app store approval process or ongoing app store fees
+- Customers do not need to download anything -- they tap a link and order
+- Works on every device without compatibility issues
+- Easier and cheaper to update (change menu, update prices, add promotions)
+- Shareable via LINE, social media, QR code on table tents, or Google search
+- Development cost is 50-80% lower than a native app
+
+**When a dedicated app makes sense:**
+- You have 500+ regular ordering customers who order at least twice per month
+- You want to integrate deep loyalty features (points, rewards, gamification)
+- Push notifications are a key part of your marketing strategy
+- You operate 5+ locations and need a branded ordering ecosystem
+- Budget: 300,000-800,000 THB for development, plus 5,000-15,000 THB/month for maintenance
+
+For most single-location and small multi-unit restaurants in Thailand, a mobile-optimized ordering page (whether through LINE, your website, or a SaaS platform) delivers 90% of the functionality at 10% of the cost.
+
+## Payment Integration in Thailand
+
+The payment step is where direct ordering either feels seamless or falls apart. Thailand's payment ecosystem is surprisingly diverse and well-developed, which works in your favor.
+
+### PromptPay QR
+
+**How it works:** You generate a QR code linked to your bank account or registered phone number. The customer scans it with any Thai banking app and the payment is instant.
+
+**Merchant PromptPay:** Register through your bank for a merchant PromptPay account with a fixed QR code. Fees vary by bank but are typically 0-0.1% for transactions under 5,000 THB. Some banks charge 0 THB for restaurant merchant accounts.
+
+**Integration:** Most ordering SaaS platforms and POS systems support PromptPay QR generation at checkout. For manual LINE ordering, simply send the QR code image in the chat when the customer confirms their order.
+
+**Why it matters:** PromptPay is the most widely used digital payment method in Thailand. Nearly every adult with a bank account can pay via PromptPay. Zero or near-zero transaction fees make it the cheapest payment method for your business.
+
+### Credit Card Payment Gateways
+
+For website and app ordering, you need a payment gateway to process credit card transactions.
+
+**Popular gateways in Thailand:**
+- **2C2P:** The largest payment gateway in Southeast Asia. Supports credit cards, PromptPay, bank transfer, TrueMoney, and Rabbit LINE Pay. Transaction fee: 2.7-3.5% per transaction. Monthly minimum fee may apply. Integration requires developer setup.
+- **Omise:** Thai-developed payment gateway with clean API documentation and easy integration. Supports credit cards, PromptPay, TrueMoney, and bank transfer. Transaction fee: 2.65-3.65% per transaction. Popular with tech-savvy operators and developers.
+- **Stripe:** Now available in Thailand. Clean integration, extensive documentation, global ecosystem. Transaction fee: 3.65% per transaction for domestic cards. Higher for international cards. Best for international-facing restaurants.
+- **PayPal:** Available but not commonly used for food ordering in Thailand. Higher fees and slower settlement than local options.
+
+For most restaurants starting direct ordering, PromptPay alone handles 60-70% of transactions. Add a credit card gateway when your order volume justifies the setup cost and you want to capture the remaining 30-40% who prefer card payment.
+
+### Cash on Delivery
+
+Do not ignore cash. Despite Thailand's rapid digital payment adoption, a significant portion of delivery customers still prefer to pay cash on delivery, particularly outside Bangkok's central business districts.
+
+**Managing COD:**
+- Set a maximum COD order value (e.g., 1,500 THB) to limit risk
+- Require a phone number confirmation before dispatching COD orders
+- Ensure your delivery riders carry sufficient change (500 THB float is standard)
+- Track COD collections and reconcile daily
+
+**The no-show problem:** COD orders have a higher cancellation rate than prepaid orders -- customers who are not home, change their mind, or placed the order impulsively. Expect a 3-5% no-show rate on COD orders versus less than 1% on prepaid orders. Some restaurants require PromptPay prepayment for orders above a certain value while offering COD for smaller orders.
+
+<Callout type="warning">
+Never require customers to use only one payment method. The fastest way to kill your direct ordering channel is to force customers through a payment flow they do not want. Offer PromptPay, COD, and card payment. Let the customer choose. The convenience difference between "I can pay how I want" and "I have to download an app to pay" is the difference between a completed order and an abandoned cart.
+</Callout>
+
+## Delivery Logistics for Direct Orders
+
+The hardest part of direct ordering is not the ordering system -- it is getting the food to the customer. Delivery platforms handle this seamlessly because they have thousands of riders. When you go direct, you need your own delivery solution.
+
+### Option 1: Your Own Delivery Riders
+
+Hiring dedicated delivery riders gives you maximum control over speed, food handling, and customer interaction. The rider arrives in your restaurant's branding, hands the food to the customer with a smile, and represents your brand -- not Grab's.
+
+**Cost per rider:**
+- Salary: 12,000-18,000 THB/month (Bangkok)
+- Motorcycle maintenance: 1,500-3,000 THB/month
+- Fuel: 2,000-4,000 THB/month
+- Insurance: 500-1,000 THB/month
+- Equipment (delivery bag, phone mount): 2,000-5,000 THB one-time
+
+**Total cost: 16,000-26,000 THB/month per rider.** A rider can typically complete 15-25 deliveries per shift depending on delivery radius and traffic conditions.
+
+**When own riders make sense:** If you average 30+ direct delivery orders per day within a 5 km radius, one or two dedicated riders can handle the volume at a lower per-delivery cost than on-demand services. Below 30 orders per day, the fixed cost of a dedicated rider is hard to justify.
+
+### Option 2: On-Demand Delivery Services
+
+Third-party logistics services let you dispatch individual deliveries without platform commissions. The customer orders from you, you prepare the food, and you call a rider to pick it up and deliver it.
+
+**Lalamove:** The most popular on-demand delivery service in Bangkok. Motorcycle delivery costs 40-80 THB per trip depending on distance (base rate starts at about 40 THB for short distances). Order a rider through the app or API, and they arrive in 5-15 minutes. Lalamove offers business accounts with volume discounts.
+
+**Grab Express / GrabBike Delivery:** Grab's on-demand courier service (separate from GrabFood). Pricing is similar to Lalamove. The advantage is Grab's larger rider network; the disadvantage is that during GrabFood peak hours, rider availability for Express deliveries can drop.
+
+**LINE MAN Delivery:** LINE MAN's on-demand delivery service. Competitive pricing with Lalamove and Grab Express. Good integration with LINE ecosystem if you are using LINE OA for ordering.
+
+**Skootar:** Thai on-demand delivery service with motorcycle and car options. Competitive pricing. Smaller rider network than Lalamove or Grab Express.
+
+**Cost comparison per delivery:**
+
+<CostBreakdown items={[
+  { category: "Lalamove (motorcycle, 0-5 km)", low: "40", high: "80", notes: "THB per delivery. Volume discounts available" },
+  { category: "Grab Express (0-5 km)", low: "45", high: "85", notes: "THB per delivery. Rider availability varies" },
+  { category: "LINE MAN Delivery (0-5 km)", low: "40", high: "75", notes: "THB per delivery" },
+  { category: "Own rider (amortized per delivery)", low: "25", high: "55", notes: "THB per delivery at 20-30 deliveries/day" },
+  { category: "GrabFood commission equivalent", low: "75", high: "105", notes: "THB on a 300 THB order (25-35%)" }
+]} />
+
+The math is clear: even at the high end of on-demand delivery costs (85 THB), you are paying less than half of what a platform charges in commission on a typical order.
+
+### Option 3: Hybrid Model
+
+The most practical approach for most restaurants: use on-demand services (Lalamove, Grab Express) for the bulk of deliveries, with the option to hire a dedicated rider when volume consistently exceeds 30-40 orders per day.
+
+**How to implement the hybrid model:**
+1. Start with Lalamove or LINE MAN Delivery for all direct orders
+2. Track delivery costs and volume weekly
+3. When average daily direct delivery orders exceed 25-30, trial a part-time dedicated rider during peak hours (11 AM-2 PM, 6 PM-9 PM)
+4. Graduate to a full-time dedicated rider when volume exceeds 40 orders per day
+5. Keep the on-demand app as backup for peak overflow and the dedicated rider's off hours
+
+### Delivery Radius and Timing
+
+**Optimal delivery radius:** 3-5 km from your restaurant. Beyond 5 km, delivery time increases significantly in Bangkok traffic, food quality degrades (especially hot dishes), and delivery costs rise. Some restaurants extend to 7-8 km for higher-value orders, but the quality risk is real.
+
+**Delivery time targets:** 30-40 minutes from order placement to delivery for orders within 5 km. This requires 10-15 minutes of preparation time and 15-25 minutes of delivery time. If your kitchen consistently takes 20+ minutes to prepare delivery orders, your total delivery time will push past 40 minutes, which is when customer satisfaction drops sharply.
+
+**Packaging matters.** Direct delivery means you control the packaging, which is a branding opportunity that platform orders do not offer. Invest in branded packaging (bags, containers, stickers) that reinforces your restaurant identity. Budget 8-15 THB per order for branded packaging versus 5-8 THB for generic containers. The incremental cost is worth it for the brand impression.
+
+<Callout type="tip">
+Include a small card or sticker in every direct delivery order with a QR code linking to your LINE OA and a 10% discount code for the next direct order. This converts one-time direct customers into repeat direct customers. The discount costs you less than the 30% commission you would pay on a platform order.
+</Callout>
+
+## Moving Customers Off Delivery Platforms
+
+This is the hardest part of building a direct ordering channel. Your customers have a habit -- they open Grab, search for food, and order. Changing that habit requires giving them a reason to go direct.
+
+### Price Incentive
+
+The most effective lever. Offer a 10-15% discount for direct orders compared to platform prices. You can afford this because your margin on direct orders is 25-30 percentage points higher than platform orders. Even with a 15% discount, a direct order is more profitable than a full-price platform order.
+
+**How to position it:** "Order direct and save 15%" is clearer than "platform prices include delivery fees." The customer needs to see an obvious financial benefit for changing their behavior.
+
+**Implementation:** Price your direct menu 10-15% below your platform menu. Or keep prices the same and offer free delivery for direct orders (absorbing the 40-80 THB delivery cost, which is still cheaper than the platform commission).
+
+### Platform-to-Direct Conversion Tactics
+
+**Include a LINE OA QR code in every platform delivery order.** Print a card or sticker that says "Save 15% on your next order -- scan to order direct" with a QR code linking to your LINE OA. This reaches the exact customer you want to convert while they are eating your food and thinking about how they like it.
+
+**Social media promotion.** Post your direct ordering link on Instagram, Facebook, and TikTok regularly. Highlight the savings. Show the ordering process. Make it look easy. For detailed tactics on [restaurant marketing in Thailand](/blog/restaurant-marketing-thailand), including social media strategy, see my dedicated guide.
+
+**Google Business Profile.** Add your direct ordering link to your Google Business Profile as the "Order" button. When customers search for your restaurant on Google, the direct ordering option appears before they even think about opening Grab.
+
+**In-restaurant promotion.** Table tents, counter cards, and bill inserts promoting your direct ordering channel. Dine-in customers who enjoy your food are the most likely to order delivery later -- make sure they know about the direct option.
+
+**Loyalty program exclusive to direct orders.** Points, stamps, or rewards that only accumulate through direct ordering. This gives customers an ongoing incentive beyond the initial discount. A simple digital stamp card (order 10 times, get one free) through LINE OA is effective and free to implement. For a deeper look at retention strategies, see my guide to [restaurant loyalty programs in Thailand](/blog/restaurant-loyalty-programs-thailand).
+
+### What Does Not Work
+
+**Removing yourself from platforms entirely.** Unless you have an established brand with very strong direct demand, delisting from Grab or LINE MAN will cost you more in lost new customers than you save in commissions. Platforms are discovery engines. Use them for what they do best.
+
+**Aggressive platform-bashing.** "Don't order from Grab!" printed on your packaging annoys the platforms (who can deprioritize your listing) and confuses customers. Frame direct ordering as a benefit ("Order direct and save"), not a complaint about platforms.
+
+**Complicated ordering processes.** If your direct ordering requires downloading an app, creating an account, and entering a credit card number before the customer can even see the menu, they will go back to Grab where ordering takes 30 seconds. Minimize friction. The ideal direct ordering flow: tap link, browse menu, add to cart, pay via PromptPay, done.
+
+## Order Management and Kitchen Integration
+
+Running direct orders alongside platform orders and dine-in creates a three-stream kitchen that needs careful management.
+
+### Unified Order Flow
+
+The goal is a single order stream where every order -- dine-in, Grab, LINE MAN, and direct -- flows through one system and prints on one ticket stream in the kitchen.
+
+**If you use a POS with direct ordering integration:** FoodStory's LineShop module, for example, feeds direct LINE orders into the same POS as dine-in and platform orders. The kitchen sees one unified ticket stream. This is the ideal setup.
+
+**If your direct ordering system is separate from your POS:** You need a process for transferring direct orders into your kitchen workflow. Options include:
+- Staff manually enters direct orders into the POS (adds 1-2 minutes per order)
+- Direct orders print on a separate printer with a distinct ticket color or label
+- A kitchen display aggregates orders from multiple sources
+
+**The worst case:** Direct orders come through LINE chat, platform orders come through platform tablets, and dine-in orders go through the POS. Your kitchen is managing three separate streams with no consolidated view. This breaks down at 40+ total orders per hour. If you are running high volume, investing in unified order management is not optional.
+
+### Preparation Time Management
+
+Direct orders require tighter time management than platform orders because you control (and are accountable for) the entire experience from order to delivery.
+
+**Set realistic preparation times:** 10-15 minutes for simple orders, 15-20 minutes for complex orders. Communicate these estimates to the customer at order confirmation. Underpromise and overdeliver -- telling a customer 20 minutes and delivering in 15 is much better than promising 15 and delivering in 25.
+
+**Prioritize correctly:** During peak hours, direct orders, platform orders, and dine-in all compete for kitchen capacity. Some restaurants give direct orders slight priority over platform orders (because the direct customer is your direct relationship), while ensuring dine-in is never delayed (because those customers are sitting in front of you watching the clock).
+
+## Cost Analysis: Direct vs. Platform Ordering
+
+Here is the full financial comparison across different order volumes, so you can see exactly where the break-even point falls for your restaurant.
+
+**Assumptions:** Average order value of 350 THB, food cost of 35%, packaging cost of 12 THB per order, Lalamove delivery at 55 THB per order, platform commission at 30%.
+
+**At 10 direct orders per day (300/month):**
+- Monthly direct order revenue: 105,000 THB
+- Delivery cost (Lalamove): 16,500 THB
+- Payment processing (1.5%): 1,575 THB
+- Technology cost (LINE OA + ordering): 1,500 THB
+- Total direct ordering cost: 19,575 THB
+- Platform commission equivalent: 31,500 THB
+- **Monthly savings from direct: 11,925 THB**
+
+**At 25 direct orders per day (750/month):**
+- Monthly direct order revenue: 262,500 THB
+- Delivery cost (Lalamove): 41,250 THB
+- Payment processing: 3,938 THB
+- Technology cost: 1,500 THB
+- Total direct ordering cost: 46,688 THB
+- Platform commission equivalent: 78,750 THB
+- **Monthly savings from direct: 32,062 THB**
+
+**At 50 direct orders per day (1,500/month):**
+- Monthly direct order revenue: 525,000 THB
+- Delivery cost (own rider x2): 40,000 THB
+- Payment processing: 7,875 THB
+- Technology cost: 3,000 THB
+- Total direct ordering cost: 50,875 THB
+- Platform commission equivalent: 157,500 THB
+- **Monthly savings from direct: 106,625 THB**
+
+<Callout type="info">
+The break-even point for direct ordering is remarkably low. Even at 5 direct orders per day using Lalamove for delivery, you save approximately 4,000 THB per month compared to those same orders coming through a platform. The investment in a basic LINE OA ordering setup (1,200 THB/month) pays for itself with just 2-3 daily orders that shift from platform to direct.
+</Callout>
+
+## Managing Both Direct and Platform Orders Simultaneously
+
+Most restaurants will not go fully direct. The realistic model is running platform and direct channels in parallel, which requires operational coordination.
+
+### Menu and Pricing Strategy
+
+**Separate menus or the same?** I recommend maintaining the same core menu on all channels but adjusting pricing and promotions:
+
+- **Platform menu:** Full price (absorbs the commission cost) with platform-specific promotions dictated by the platform's own campaign calendar
+- **Direct menu:** 10-15% lower prices or free delivery, with your own promotional calendar
+- **Dine-in menu:** Your standard menu, which may differ from the delivery menu (some dishes do not travel well)
+
+**Menu simplification for delivery:** Whether platform or direct, your delivery menu should be a curated subset of your dine-in menu. Dishes that lose quality during transit (crispy items that go soggy, composed dishes that shift during transport, items that must be served immediately) should be removed. This applies to all delivery channels. For guidance on optimizing menus specifically for delivery, see my guide on [menu engineering for food delivery](/blog/menu-engineering-food-delivery-thailand).
+
+### Technology Stack
+
+The full technology stack for running parallel direct and platform ordering:
+
+**Essential:**
+- [POS system](/blog/restaurant-pos-systems-thailand) with multi-channel support (FoodStory recommended)
+- LINE OA (free or Light plan at 480 THB/month)
+- Lalamove business account (free to set up, pay per delivery)
+- PromptPay merchant QR
+
+**Recommended additions:**
+- LINE chatbot or integrated ordering platform (590-1,500 THB/month)
+- Website ordering page (either SaaS or self-built)
+- Basic CRM or customer spreadsheet for direct ordering customers
+
+**For scaling (25+ direct orders/day):**
+- Dedicated ordering system integrated with POS
+- Credit card payment gateway (2C2P or Omise)
+- Customer loyalty system
+- Delivery route optimization (if using own riders)
+
+### Staff Training
+
+Your staff needs to handle direct orders as competently as platform orders. Train them on:
+
+- **LINE OA management:** How to respond to order messages, confirm orders, send payment QR codes, and update order status
+- **Order entry:** How to enter direct orders into the POS or kitchen workflow
+- **Delivery coordination:** How to call a Lalamove rider, package orders for pickup, and hand off to riders
+- **Customer communication:** How to handle order modifications, delays, complaints, and refund requests through LINE
+- **Payment reconciliation:** How to verify PromptPay payments and reconcile daily direct order revenue
+
+Designate one staff member per shift as the "direct order manager" responsible for monitoring LINE OA, coordinating deliveries, and ensuring direct orders flow smoothly. This role takes about 20-30% of one person's shift time at 10-20 orders per day.
+
+## Loyalty and Repeat Ordering Incentives
+
+Direct ordering only generates long-term value if customers come back. Loyalty programs designed specifically for direct ordering create that repeat behavior.
+
+### Simple Stamp Card (LINE OA)
+
+The easiest loyalty program to implement. Create a digital stamp card through LINE OA's built-in rewards feature or a simple manual tracking system.
+
+**Structure:** Order 8 times through direct ordering, get a free dish or 100 THB credit on order #9. Each order earns one stamp regardless of value (or set a minimum order value of 200 THB to qualify).
+
+**Why it works:** It is familiar (everyone understands stamp cards), requires no technology beyond LINE OA, and creates a clear goal that drives repeat behavior.
+
+### Direct-Only Promotions
+
+Offers that are exclusively available through your direct ordering channel:
+
+- **Early bird specials:** 20% off orders placed before 11 AM
+- **Combo deals:** Direct-only meal bundles at better value than ordering items separately
+- **New dish previews:** Direct ordering customers get access to new menu items before they appear on platforms
+- **Birthday rewards:** Automated birthday message through LINE OA with a free dessert or discount code
+
+### Referral Program
+
+Encourage direct ordering customers to bring their friends:
+
+- "Share your referral code with a friend. When they place their first direct order, you both get 50 THB off your next order."
+- Track referrals through unique LINE OA coupon codes or a simple spreadsheet
+
+Referral programs work well for direct ordering because the referrer has a genuine incentive to share (the discount) and a genuine reason to promote direct over platform (they know about the savings).
+
+## Comparing Direct Ordering Platforms in Thailand
+
+Here is a practical comparison of the direct ordering tools available for Thai restaurants in 2026.
+
+<CostBreakdown items={[
+  { category: "LINE OA (manual ordering)", low: "0", high: "1,200", notes: "THB/month. Lowest cost, highest labor" },
+  { category: "FoodStory LineShop", low: "500", high: "1,500", notes: "THB/month add-on. Best POS integration" },
+  { category: "Lineshop.co.th", low: "590", high: "1,490", notes: "THB/month. Thai-focused, standalone" },
+  { category: "GloriaFood", low: "0", high: "1,500", notes: "THB/month. Free tier available, international" },
+  { category: "Oddle", low: "3%", high: "5%", notes: "Per order commission. No monthly fee" },
+  { category: "WordPress + WooCommerce", low: "200", high: "1,500", notes: "THB/month. Full control, needs maintenance" },
+  { category: "Custom LIFF / web app", low: "50,000", high: "600,000", notes: "THB one-time build. Maximum flexibility" }
+]} />
+
+**My recommendation by restaurant size:**
+
+**Small restaurant (under 30 seats, under 15 delivery orders/day):** LINE OA with manual ordering and PromptPay payment. Total cost: 0-1,200 THB/month. Graduate to a chatbot when volume exceeds 15 orders/day.
+
+**Mid-size restaurant (30-60 seats, 15-40 delivery orders/day):** FoodStory POS + LineShop add-on, or Lineshop.co.th if you do not use FoodStory. Add PromptPay + Rabbit LINE Pay for payment options, Lalamove for delivery. Total cost: 1,500-3,000 THB/month plus delivery costs.
+
+**Large restaurant or multi-unit (60+ seats or 2+ locations):** FoodStory POS with full delivery integration, website ordering page (SaaS or custom), credit card gateway (2C2P or Omise), own delivery riders during peak hours with Lalamove backup. Total cost: 3,000-5,000 THB/month plus delivery riders.
+
+**[Cloud kitchen](/blog/cloud-kitchen-bangkok) or delivery-focused concept:** Custom ordering system integrated with POS, website and LINE OA dual channels, full payment gateway, own delivery fleet or hybrid model. The higher investment is justified because delivery is your primary revenue channel, not a supplement to dine-in.
+
+## Common Mistakes with Direct Ordering
+
+**Building the system before validating demand.** Spending 200,000 THB on a custom ordering app before confirming that customers will actually order directly from you. Start with LINE OA manual ordering at near-zero cost. If nobody orders within 2 months of promotion, the problem is demand, not technology.
+
+**Complicated ordering flow.** Every additional step between "I want food" and "Order confirmed" loses customers. Test your ordering flow with someone who has never used it. If it takes more than 2 minutes from opening the menu to placing an order, simplify it.
+
+**Limited payment options.** "We only accept bank transfer" eliminates customers who want to pay by PromptPay, card, or cash. Offer at least PromptPay and COD from day one. Add card payment when you add a gateway.
+
+**No delivery solution planned.** Building an ordering system without figuring out how the food gets to the customer. The ordering system is 30% of the problem; delivery logistics is 70%.
+
+**Ignoring order tracking.** Platform customers are used to real-time order tracking. Direct ordering customers expect something similar -- at minimum, a confirmation message, a "your order is being prepared" update, and an "on the way" notification. LINE OA makes this easy with manual messages or chatbot automation.
+
+**Giving up too early.** Direct ordering takes 3-6 months to build meaningful volume. The first month, you might get 3 orders per day. By month 3, 10-15 per day if you are actively promoting the channel. Consistency of promotion is more important than the platform you use.
+
+## When Direct Ordering Does Not Make Sense
+
+Direct ordering is not the right move for every restaurant.
+
+**Very low delivery volume.** If your restaurant does fewer than 10 total delivery orders per day (including platforms), the infrastructure and effort of building a direct ordering channel will not generate meaningful savings. Focus on improving your dine-in business or growing platform volume first.
+
+**No delivery infrastructure available.** If you operate in an area where Lalamove, Grab Express, and other on-demand services are unreliable or unavailable, and you cannot justify hiring your own riders, getting orders delivered becomes the bottleneck that makes the whole system impractical.
+
+**Tourist-heavy location with no repeat customers.** If your customer base is primarily tourists who visit once and never return, there is no "repeat ordering" behavior to capture. Platforms make more sense because they are the discovery channel tourists use. Direct ordering works best with local customers who have repeat intent.
+
+**Restaurant does not handle delivery well.** If your menu is fundamentally designed for dine-in (sizzling plates, delicate presentations, items that must be consumed within minutes of preparation), delivery of any kind -- platform or direct -- will disappoint customers. Fix the delivery menu problem first, then build the channel.
+
+**Owner bandwidth is maxed.** Building and managing a direct ordering channel requires someone's attention. If you are already stretched thin running the restaurant, adding another operational channel will add stress without adding competence. Hire or free up a team member to own the channel before launching it.
+
+The honest truth is that for many small restaurants in Thailand, delivery platforms are a reasonable channel even with the 30% commission, because they handle everything -- customer acquisition, ordering interface, payment processing, and delivery logistics -- with zero setup cost. Direct ordering becomes clearly advantageous when your delivery volume is high enough that the commission savings exceed the cost and effort of running your own system, which for most restaurants happens somewhere between 15-25 orders per day.
+
+If you are doing 25+ delivery orders per day and not running a direct ordering channel, you are leaving 30,000-100,000 THB per month on the table. That is not a rounding error -- it is the difference between a struggling delivery operation and a profitable one.
+
+For a full evaluation of your delivery strategy including platform optimization, direct ordering setup, and [delivery menu engineering](/blog/menu-engineering-food-delivery-thailand), book a [free consultation](/free-consultation) and we will walk through the numbers for your specific situation.
+
+---
+
+## Frequently Asked Questions
+
+<FAQ items={[
+  {
+    question: "How much can I save with direct online ordering vs. delivery platforms?",
+    answer: "On a typical 350 THB order, direct ordering saves you approximately 50-65 THB compared to a platform order (even after delivery and payment processing costs). At 25 direct orders per day, that translates to roughly 32,000 THB in monthly savings. The exact amount depends on your average order value, delivery distance, and whether you use on-demand delivery services or your own riders."
+  },
+  {
+    question: "What is the cheapest way to start direct ordering for my restaurant?",
+    answer: "LINE Official Account with manual ordering and PromptPay payment. Total cost: 0-1,200 THB per month. Set up a LINE OA, create a rich menu with an Order button, send your menu to customers who message you, and collect payment via PromptPay QR. This approach works for up to 15-20 orders per day before the manual workload becomes burdensome."
+  },
+  {
+    question: "Should I remove my restaurant from Grab and LINE MAN?",
+    answer: "No. Platforms serve as customer acquisition channels -- they bring you new customers who have never heard of your restaurant. The strategy is to use platforms for discovery and direct ordering for retention. Include a card in every platform delivery order with your LINE OA QR code and a 10-15% discount for ordering direct next time. Over time, your most loyal customers migrate to direct ordering while new customers continue to find you through platforms."
+  },
+  {
+    question: "How do I handle delivery for direct orders?",
+    answer: "Start with on-demand delivery services like Lalamove (40-80 THB per delivery within 5 km) or Grab Express. These require no upfront investment and scale with your order volume. When you consistently exceed 30 direct delivery orders per day, consider hiring a dedicated rider (16,000-26,000 THB per month including salary, fuel, and maintenance). Most restaurants use a hybrid: dedicated riders during peak hours, on-demand services for off-peak and overflow."
+  },
+  {
+    question: "Do I need a custom app for direct ordering?",
+    answer: "For 95% of restaurants, no. A LINE OA with chatbot ordering or a mobile-optimized website handles direct ordering effectively at a fraction of the cost. Custom apps cost 300,000-800,000 THB to develop and 5,000-15,000 THB per month to maintain. They only make sense if you have 500+ regular ordering customers, operate 5+ locations, or need deep loyalty integration with push notifications."
+  },
+  {
+    question: "How long does it take to build meaningful direct ordering volume?",
+    answer: "Expect 3-6 months to build consistent direct ordering volume. Month 1 typically yields 3-5 orders per day if you actively promote the channel (QR cards in platform orders, social media posts, in-restaurant signage). By month 3, active promotion and a loyalty incentive should push volume to 10-15 orders per day. By month 6, with consistent effort and a good customer experience, 20-30 daily orders is achievable for restaurants doing 50+ total daily delivery orders across all channels."
+  }
+]} />
