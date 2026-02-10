@@ -211,7 +211,7 @@ Each article goes through this pipeline:
 ### Writing Style Rules
 - **KEEP bold+colon lists** (`**Term:** explanation`) — good for scannability, do NOT convert to prose
 - **Sentence flow** — avoid 3+ short choppy sentences in a row. Combine middles with "while", "and", "which", commas, semicolons. Keep strong openers and punchy closers standalone.
-- **Em dashes** — max 2-3 per section, prefer periods/commas/colons
+- **Dashes** — avoid em dashes (`—`). In lists use normal dash (`-`), in prose use double dash (`--`). Em dashes only for rare high-impact asides (max 1-2 per article). Use discretion.
 - **Never use** — "Let me show you", "Additionally", "landscape" (abstract), "delve", "foster", "enhance", "showcase", "crucial", "pivotal", "vital"
 - **Voice** — first-person Penny, expert but approachable, opinions welcome, specific data > vague claims
 - **Structure** — mix bold+colon lists with analytical paragraphs, anecdotes, and questions
