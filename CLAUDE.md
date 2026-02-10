@@ -202,14 +202,23 @@ Each article goes through this pipeline:
 1. **Research** — keyword/SERP analysis, competitive gaps
 2. **Brief** — outline, target word count, internal links, FAQs
 3. **Generate** — first draft via Claude (first-person Penny voice, Callout/CostBreakdown/FAQ components)
-4. **Humanize** — run through Humanizer skill (`~/.claude/skills/humanizer`) to remove AI-sounding patterns
-5. **Copy-Edit** — apply marketingskills `copy-editing` Seven Sweeps (clarity, voice, so-what, prove-it, specificity, emotion, zero-risk)
-6. **Review** — validate word count, internal links, frontmatter, duplicate content
-7. **Publish** — commit MDX, deploy, flip `published: true` on schedule
+4. **Humanize** — run through Humanizer skill with project overrides (`~/.claude/skills/humanizer-overrides.md`)
+5. **Sentence Flow Pass** — combine choppy 3+ short sentence sequences into flowing prose
+6. **Copy-Edit** — apply marketingskills `copy-editing` Seven Sweeps (clarity, voice, so-what, prove-it, specificity, emotion, zero-risk)
+7. **Review** — validate word count, internal links, frontmatter, duplicate content
+8. **Publish** — commit MDX, deploy, flip `published: true` on schedule
+
+### Writing Style Rules
+- **KEEP bold+colon lists** (`**Term:** explanation`) — good for scannability, do NOT convert to prose
+- **Sentence flow** — avoid 3+ short choppy sentences in a row. Combine middles with "while", "and", "which", commas, semicolons. Keep strong openers and punchy closers standalone.
+- **Em dashes** — max 2-3 per section, prefer periods/commas/colons
+- **Never use** — "Let me show you", "Additionally", "landscape" (abstract), "delve", "foster", "enhance", "showcase", "crucial", "pivotal", "vital"
+- **Voice** — first-person Penny, expert but approachable, opinions welcome, specific data > vague claims
+- **Structure** — mix bold+colon lists with analytical paragraphs, anecdotes, and questions
 
 Tools:
-- **Humanizer**: https://github.com/blader/humanizer — removes 24 AI writing patterns (significance inflation, filler, sycophantic tone, etc.)
-- **marketingskills**: https://github.com/coreyhaines31/marketingskills — 25 marketing skills for Claude Code. Key skills: `content-strategy`, `copywriting`, `copy-editing`, `seo-audit`, `programmatic-seo`, `schema-markup`
+- **Humanizer**: `~/.claude/skills/humanizer` + **overrides**: `~/.claude/skills/humanizer-overrides.md`
+- **marketingskills**: `~/.claude/skills/marketingskills` — key skills: `content-strategy`, `copywriting`, `copy-editing`, `seo-audit`, `programmatic-seo`, `schema-markup`
 
 ### Execution
 - Write in batches of 8-10 using parallel agents
