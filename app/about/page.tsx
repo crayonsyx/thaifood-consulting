@@ -1,15 +1,32 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { images } from "@/lib/images";
+import { siteConfig } from "@/lib/constants";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import JsonLd from "@/components/shared/JsonLd";
 import CTA from "@/components/shared/CTA";
 import { personSchema, organizationSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About Our F&B Consulting Team",
   description:
-    "Meet the team behind ThaiFood Consulting. Michelin-starred F&B expertise helping restaurants launch and grow across Thailand and Southeast Asia.",
+    "Meet Penny, a Michelin-starred F&B consultant with 15+ years of experience helping restaurants launch and grow across Thailand and Southeast Asia.",
+  alternates: {
+    canonical: `${siteConfig.url}/about`,
+  },
+  openGraph: {
+    title: `About | ${siteConfig.name}`,
+    description:
+      "Michelin-starred F&B consultant with 15+ years helping restaurants across Thailand.",
+    url: `${siteConfig.url}/about`,
+    images: [
+      {
+        url: `${siteConfig.url}/api/og?title=${encodeURIComponent("About Us")}&subtitle=${encodeURIComponent("Michelin-starred F&B consulting")}`,
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
 };
 
 const milestones = [
@@ -73,7 +90,7 @@ export default function AboutPage() {
             ]}
           />
           <h1 className="mt-8 font-heading text-4xl font-bold md:text-6xl">
-            About Us
+            About Our F&amp;B Consulting Team
           </h1>
         </div>
       </section>

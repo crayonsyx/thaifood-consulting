@@ -3,14 +3,31 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { services } from "@/lib/services";
+import { siteConfig } from "@/lib/constants";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import JsonLd from "@/components/shared/JsonLd";
 import { organizationSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: "Restaurant Consulting Services Thailand",
   description:
     "F&B consulting services: menu engineering, restaurant concept development, cloud kitchen consulting, and feasibility studies across Thailand and Southeast Asia.",
+  alternates: {
+    canonical: `${siteConfig.url}/services`,
+  },
+  openGraph: {
+    title: `Services | ${siteConfig.name}`,
+    description:
+      "Menu engineering, concept development, cloud kitchens, and feasibility studies.",
+    url: `${siteConfig.url}/services`,
+    images: [
+      {
+        url: `${siteConfig.url}/api/og?title=${encodeURIComponent("Our Services")}&subtitle=${encodeURIComponent("F&B Consulting Thailand")}`,
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
 };
 
 export default function ServicesPage() {
@@ -28,7 +45,7 @@ export default function ServicesPage() {
             ]}
           />
           <h1 className="mt-8 font-heading text-4xl font-bold md:text-6xl">
-            Our Services
+            Restaurant Consulting Services
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-foreground-muted">
             Comprehensive F&B consulting for every stage of your restaurant

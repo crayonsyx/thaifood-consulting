@@ -9,14 +9,24 @@ import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import BlogListClient from "./BlogListClient";
 
 export const metadata: Metadata = {
-  title: "Blog | Insights & Guides",
+  title: "Restaurant Industry Blog Thailand | Guides & Insights",
   description:
-    "Practical advice on opening and running restaurants in Thailand, from a consultant who has done it at the highest level.",
+    "Practical advice on opening and running restaurants in Thailand, from a Michelin-starred consultant. Guides on costs, licensing, staffing, and more.",
+  alternates: {
+    canonical: `${siteConfig.url}/blog`,
+  },
   openGraph: {
     title: `Blog | ${siteConfig.name}`,
     description:
       "Practical advice on opening and running restaurants in Thailand.",
     url: `${siteConfig.url}/blog`,
+    images: [
+      {
+        url: `${siteConfig.url}/api/og?title=${encodeURIComponent("Insights & Guides")}&subtitle=${encodeURIComponent("Restaurant industry blog")}`,
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
 };
 
@@ -55,7 +65,7 @@ export default async function BlogPage() {
 
           <div className="mt-8 mb-12 animate-fade-in-up">
             <h1 className="font-heading text-4xl md:text-5xl text-foreground mb-4">
-              Insights &amp; Guides
+              Thailand Restaurant Industry Blog
             </h1>
             <p className="text-foreground-muted text-lg max-w-2xl">
               Practical advice on opening and running restaurants in Thailand,

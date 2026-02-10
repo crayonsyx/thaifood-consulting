@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -8,9 +9,31 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { images } from "@/lib/images";
-import { stats } from "@/lib/constants";
+import { siteConfig, stats } from "@/lib/constants";
 import { services } from "@/lib/services";
+import { getPublishedPosts, formatDate } from "@/lib/content";
 import CTA from "@/components/shared/CTA";
+
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "F&B Consultant Thailand | Restaurant Consulting Bangkok",
+  description:
+    "Michelin-starred F&B consulting for restaurants in Thailand. Menu engineering, concept development, cloud kitchens, and feasibility studies. Free 30-minute strategy call.",
+  openGraph: {
+    title: `${siteConfig.name} | F&B Consultant Thailand`,
+    description:
+      "Michelin-starred F&B consulting for restaurants in Thailand and Southeast Asia.",
+    url: siteConfig.url,
+    images: [
+      {
+        url: `${siteConfig.url}/api/og?title=${encodeURIComponent("F&B Consultant Thailand")}&subtitle=${encodeURIComponent("Michelin-starred restaurant consulting")}`,
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+};
 
 const iconMap: Record<string, React.ReactNode> = {
   UtensilsCrossed: <UtensilsCrossed className="h-8 w-8 text-accent-gold" />,
@@ -19,7 +42,9 @@ const iconMap: Record<string, React.ReactNode> = {
   BarChart3: <BarChart3 className="h-8 w-8 text-accent-gold" />,
 };
 
-export default function Home() {
+export default async function Home() {
+  const allPosts = await getPublishedPosts();
+  const latestPosts = allPosts.slice(0, 3);
   return (
     <>
       {/* Hero */}
@@ -34,9 +59,9 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <h1 className="animate-fade-in-up font-heading text-5xl font-bold leading-tight md:text-7xl">
-            Launch Your Restaurant.
+            Thailand&apos;s F&amp;B Consultant
             <br />
-            Done Right.
+            for Restaurants That Win.
           </h1>
           <p className="animate-fade-in-up animation-delay-100 mx-auto mt-6 max-w-2xl text-lg text-white md:text-xl [text-shadow:_0_1px_12px_rgba(0,0,0,0.8)]">
             Michelin-starred expertise for restaurants and food businesses across
@@ -171,29 +196,24 @@ export default function Home() {
             </Link>
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {[
-              {
-                title: "How Much Does It Cost to Open a Restaurant in Bangkok?",
-                date: "Coming Soon",
-              },
-              {
-                title: "Menu Engineering 101: The Science Behind Profitable Menus",
-                date: "Coming Soon",
-              },
-              {
-                title: "Cloud Kitchen vs. Traditional Restaurant: Which Is Right for You?",
-                date: "Coming Soon",
-              },
-            ].map((post) => (
-              <div
-                key={post.title}
-                className="rounded-xl border border-border bg-background-card p-6"
+            {latestPosts.map((post) => (
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className="group rounded-xl border border-border bg-background-card p-6 transition-colors hover:border-accent-gold"
               >
-                <p className="text-xs text-foreground-subtle">{post.date}</p>
-                <h3 className="mt-2 font-heading text-lg font-bold leading-snug">
+                <p className="text-xs text-foreground-subtle">
+                  {formatDate(post.date)}
+                </p>
+                <h3 className="mt-2 font-heading text-lg font-bold leading-snug group-hover:text-accent-gold transition-colors">
                   {post.title}
                 </h3>
-              </div>
+                {post.excerpt && (
+                  <p className="mt-2 text-sm text-foreground-muted line-clamp-2">
+                    {post.excerpt}
+                  </p>
+                )}
+              </Link>
             ))}
           </div>
           <div className="mt-8 text-center sm:hidden">

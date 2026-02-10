@@ -9,14 +9,24 @@ import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import CaseStudyCard from "@/components/case-studies/CaseStudyCard";
 
 export const metadata: Metadata = {
-  title: "Case Studies",
+  title: "F&B Consulting Case Studies Thailand",
   description:
     "Real results from real F&B projects across Thailand and Southeast Asia. See how we help restaurants, cloud kitchens, and food businesses grow.",
+  alternates: {
+    canonical: `${siteConfig.url}/case-studies`,
+  },
   openGraph: {
     title: `Case Studies | ${siteConfig.name}`,
     description:
       "Real results from real F&B projects across Thailand and Southeast Asia.",
     url: `${siteConfig.url}/case-studies`,
+    images: [
+      {
+        url: `${siteConfig.url}/api/og?title=${encodeURIComponent("Case Studies")}&subtitle=${encodeURIComponent("Real results from real projects")}`,
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
 };
 
@@ -43,7 +53,7 @@ export default async function CaseStudiesPage() {
 
           <div className="mt-8 mb-12 animate-fade-in-up">
             <h1 className="font-heading text-4xl md:text-5xl text-foreground mb-4">
-              Our Work
+              F&amp;B Consulting Case Studies
             </h1>
             <p className="text-foreground-muted text-lg max-w-2xl">
               Real results from real projects across Thailand and Southeast

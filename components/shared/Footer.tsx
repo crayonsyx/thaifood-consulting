@@ -126,8 +126,16 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-border pt-8 text-center text-sm text-foreground-subtle">
-          &copy; {year} {siteConfig.name}. All rights reserved.
+        <div className="mt-12 border-t border-border pt-8 flex flex-col items-center gap-2 text-sm text-foreground-subtle">
+          <div>
+            &copy; {year} {siteConfig.name}. All rights reserved.
+          </div>
+          <Link
+            href="/privacy"
+            className="hover:text-foreground transition-colors"
+          >
+            Privacy Policy
+          </Link>
         </div>
       </div>
     </footer>
