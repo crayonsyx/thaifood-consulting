@@ -17,6 +17,7 @@ import PostGrid from "@/components/blog/PostGrid";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import JsonLd from "@/components/shared/JsonLd";
 import CTA from "@/components/shared/CTA";
+import LeadCaptureForm from "@/components/shared/LeadCaptureForm";
 
 export const revalidate = 60;
 
@@ -152,6 +153,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <div className="prose prose-lg max-w-none animate-fade-in-up animation-delay-200">
             <MDXContent content={post.body} />
           </div>
+
+          {/* Lead capture CTA */}
+          <LeadCaptureForm
+            leadMagnet="Free Restaurant P&L Template"
+            heading="Plan your restaurant finances"
+            description="Get our free P&L template -- the same one Penny uses with her consulting clients across Southeast Asia."
+            ctaText="Download Free Template"
+            tags="penny_fnb,blog_cta,pnl_template"
+            source={`blog_${post.slug}`}
+            variant="inline"
+          />
 
           {/* Share buttons */}
           <div className="mt-12 pt-8 border-t border-border flex items-center justify-between flex-wrap gap-4">

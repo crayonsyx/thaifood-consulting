@@ -7,6 +7,7 @@ import { breadcrumbSchema } from "@/lib/seo";
 import JsonLd from "@/components/shared/JsonLd";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import BlogListClient from "./BlogListClient";
+import LeadCaptureForm from "@/components/shared/LeadCaptureForm";
 
 export const metadata: Metadata = {
   title: "Restaurant Industry Blog Thailand | Guides & Insights",
@@ -74,6 +75,19 @@ export default async function BlogPage() {
           </div>
 
           <BlogListClient posts={serializedPosts} />
+
+          {/* Lead capture */}
+          <div className="mt-16 max-w-xl mx-auto">
+            <LeadCaptureForm
+              leadMagnet="Free Restaurant P&L Template"
+              heading="Get the free P&L template"
+              description="The same template Penny uses with her consulting clients. Plug in your numbers and see your path to profitability."
+              ctaText="Download Free"
+              tags="penny_fnb,blog_listing,pnl_template"
+              source="blog_listing"
+              variant="card"
+            />
+          </div>
         </div>
       </section>
     </>
