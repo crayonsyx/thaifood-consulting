@@ -1,0 +1,512 @@
+---
+title: "Food Cost Control for Bangkok Restaurants"
+slug: "food-cost-control-bangkok"
+date: '2026-02-14'
+excerpt: "How to track, reduce, and control food costs in a Bangkok restaurant -- from wholesale sourcing at Makro and Talad Thai to waste tracking, recipe costing cards, and vendor negotiation."
+category: "menu-engineering"
+tags:
+  - menu-engineering
+  - food-cost
+  - operations
+  - bangkok
+  - profitability
+coverImage: images/blog-placeholder.jpg
+coverImageAlt: "Restaurant kitchen prep station with portioned ingredients"
+author: "penny"
+featured: false
+published: false
+seo:
+  title: "Food Cost Control for Bangkok Restaurants (2026)"
+  description: "How to control food costs in Bangkok restaurants. Target percentages by type, wholesale sourcing, waste tracking, portion control, and vendor negotiation."
+---
+
+Every restaurant has two ways to make more money: increase revenue or decrease costs. Most owners obsess over the first and ignore the second. But in a city where ingredient prices have risen 18-22% since 2023 and competition keeps a ceiling on what you can charge, the restaurants that survive in Bangkok are the ones that control their food costs with discipline.
+
+I am not talking about cutting corners. I am talking about knowing, down to the baht, what every dish on your menu costs to produce, and then making deliberate decisions about sourcing, portioning, waste, and substitution that protect your margins without compromising quality. The difference between a restaurant running 30% food cost and one running 36% food cost on 1.5 million THB/month in revenue is 90,000 THB/month -- over a million baht per year -- going to waste, over-portioning, bad purchasing, or some combination of all three.
+
+I have helped dozens of Bangkok restaurants cut their food costs by 5-8 percentage points. Not through magic, not through cheaper ingredients, but through systems. Recipe costing cards, waste tracking logs, portion control standards, and smarter purchasing. The tools are simple. The hard part is actually using them consistently.
+
+This article is the full playbook.
+
+<Callout type="info">
+All figures in this article are in Thai Baht (THB). At the time of writing, 1 USD is approximately 35.5 THB. Ingredient prices are based on Bangkok wholesale market rates as of Q1 2026. Provincial prices may run 10-20% lower. For menu pricing strategy and the Stars/Plowhorses/Puzzles/Dogs framework, see: [Menu Engineering for Thai Restaurants](/blog/menu-engineering-thailand).
+</Callout>
+
+## What Food Cost Percentage Should You Target?
+
+Food cost percentage is your total food purchases divided by your total food revenue, expressed as a percentage. If you spent 450,000 THB on food ingredients last month and generated 1,500,000 THB in food revenue, your food cost is 30%.
+
+But "30%" is not a universal target. The right number depends on your restaurant type, your average check, and your operating model.
+
+<CostBreakdown items={[
+  { category: "Street-style / Quick-service", low: "25%", high: "30%", notes: "Low rent, minimal staff, simple prep. Every percentage point matters at low price points." },
+  { category: "Casual Thai dining", low: "28%", high: "33%", notes: "Most common format in Bangkok. Target 30% as your benchmark." },
+  { category: "Western casual dining", low: "30%", high: "35%", notes: "Higher protein costs, imported ingredients. Offset with beverage margin." },
+  { category: "Japanese / Korean", low: "32%", high: "38%", notes: "Imported fish, sauces, specialty ingredients push costs higher." },
+  { category: "Fine dining", low: "35%", high: "45%", notes: "Premium ingredients, lower volume. Viable because average check is 2,000-5,000+ THB." },
+  { category: "Cloud kitchen / Delivery-only", low: "28%", high: "33%", notes: "Same food cost as casual, but 30-35% platform commission eats your margin." },
+  { category: "Cafe / Coffee shop", low: "22%", high: "28%", notes: "Beverages dominate at 15-22% cost. Food items are secondary." }
+]} />
+
+A few things worth noting about these ranges.
+
+Fine dining restaurants can tolerate 35-45% food cost because a single cover generates 2,000-5,000+ THB in revenue, with 50-70% of diners adding a beverage pairing at 78-85% margin. The high food cost is deliberate -- it buys premium ingredients that justify premium pricing. A casual restaurant running 40% food cost is bleeding money because the average check (200-400 THB) does not generate enough gross profit to cover fixed costs. For a full breakdown of how these cost structures map to different restaurant types and [startup budgets in Bangkok](/blog/cost-restaurant-bangkok), the key insight is that your food cost target must match your revenue model.
+
+Cloud kitchens need to be at the low end of their range because the 30-35% platform commission effectively doubles your cost structure. A dish with 30% food cost that sells for 200 THB on GrabFood generates 140 THB in net revenue (after 30% commission), minus 60 THB in food cost, leaving 80 THB to cover everything else. That is tight. At 35% food cost, you are working with just 70 THB.
+
+If your blended food cost (across all menu items) is above 35% and you are not fine dining, something is wrong. Either your prices are too low, your portions are too large, your waste is too high, or your purchasing is inefficient. Probably a combination. Let me walk through how to diagnose and fix each one.
+
+## Step 1: Build Recipe Costing Cards
+
+A recipe costing card is a document that lists every ingredient in a dish, the exact quantity used, the current purchase price, and the resulting cost per serving. If you do not have these for every item on your menu, you are guessing at your food cost. And guessing, in my experience, is wrong by 15-30%.
+
+Here is what a recipe costing card looks like for pad kra pao moo (stir-fried pork with holy basil):
+
+<CostBreakdown items={[
+  { category: "Minced pork (200g)", low: "24 THB", high: "30 THB", notes: "Makro price 120-150 THB/kg" },
+  { category: "Holy basil (1 bunch, ~30g)", low: "3 THB", high: "5 THB", notes: "Talad Thai price 80-120 THB/kg" },
+  { category: "Bird's eye chilli (10g)", low: "1 THB", high: "2 THB", notes: "Price spikes in rainy season" },
+  { category: "Garlic (15g)", low: "1.5 THB", high: "2 THB", notes: "Imported Chinese garlic cheaper than Thai" },
+  { category: "Cooking oil (30ml)", low: "2 THB", high: "3 THB", notes: "Palm oil at ~65 THB/litre wholesale" },
+  { category: "Fish sauce (15ml)", low: "1 THB", high: "1.5 THB", notes: "Tiparos/Squid brand, bulk pricing" },
+  { category: "Oyster sauce (10ml)", low: "1 THB", high: "1.5 THB", notes: "Maekrua brand" },
+  { category: "Sugar (5g)", low: "0.3 THB", high: "0.5 THB", notes: "Negligible cost" },
+  { category: "Fried egg (1)", low: "4 THB", high: "5 THB", notes: "Egg prices fluctuate seasonally" },
+  { category: "Steamed rice (1 serving)", low: "3 THB", high: "5 THB", notes: "Jasmine rice at ~30-40 THB/kg" },
+  { category: "Waste factor (7%)", low: "2.9 THB", high: "3.9 THB", notes: "Trimmings, breakage, spillage" }
+]} />
+
+**Total food cost per serving: 43.7-59.4 THB**
+
+If you sell this at 180 THB, your food cost is 24-33%. At 150 THB, it is 29-40%. That range matters. The difference between using 200g of pork versus 250g, between buying garlic at Makro versus a convenience supplier, between tracking waste and ignoring it -- that is the difference between a profitable dish and a break-even one.
+
+### How to Build Your Costing Cards
+
+1. **Start with your 10 best-selling items.** These represent 60-70% of your food revenue, so getting their costs right has the biggest impact.
+
+2. **Weigh everything.** Do not estimate. Put a digital scale in the prep station (500 THB at Lazada) and weigh every ingredient for one batch. Record it.
+
+3. **Use current purchase prices.** Not the price from three months ago. Pull your latest Makro receipt, your latest market invoices, and use those numbers. Update quarterly at minimum.
+
+4. **Include everything.** Garnishes, cooking oil, condiments served on the side, the lime wedge, the cucumber slices. These "small" items add 3-8% to your food cost and are the most commonly omitted.
+
+5. **Add a waste factor.** 5-8% for most Thai kitchens. This covers trimming waste (the parts of vegetables and herbs you discard), cooking loss (evaporation, oil absorption), breakage, and spoilage of garnishes.
+
+6. **Calculate cost per serving and food cost percentage.** Food cost % = (total ingredient cost / selling price) x 100.
+
+<Callout type="tip">
+Create your costing cards in a spreadsheet (Google Sheets works fine) and link the ingredient prices to a master price list tab. When prices change, update the master list and every recipe card updates automatically. This turns a quarterly repricing exercise from a full day's work into a 30-minute task.
+</Callout>
+
+## Step 2: Source Smarter -- Bangkok's Wholesale Markets
+
+Where you buy ingredients determines 15-25% of your food cost variance. A restaurant buying pork at a Tops Market convenience store pays 180-220 THB/kg. The same pork at Makro is 120-150 THB/kg. At Talad Thai (the massive wholesale market in Pathum Thani), it can drop to 95-120 THB/kg for bulk orders. That difference, multiplied across every protein on your menu and every day of the month, is significant.
+
+Here are the sourcing options in Bangkok, ranked by cost:
+
+### Talad Thai (ตลาดไท) -- Pathum Thani
+
+The largest wholesale market in Southeast Asia. This is where restaurants, hotels, and food manufacturers buy produce, meat, and seafood in bulk.
+
+**Best for:** Vegetables, fruits, herbs, seafood (especially whole fish), rice, dry goods.
+
+**Pricing advantage:** 30-50% below retail, 10-20% below Makro on most produce.
+
+**Minimum order:** No formal minimum, but quantities are wholesale-sized (e.g., 10 kg bags of rice, cases of 30 eggs, 5 kg bags of chilli). You need to buy in bulk to get the best prices.
+
+**Drawback:** Located in Pathum Thani -- a 45-90 minute drive from central Bangkok depending on traffic. Opens at 2-3 AM for the best selection, with most serious buying done by 7 AM. This requires a dedicated morning run or a delivery arrangement with a regular vendor.
+
+**Pro tip:** Build relationships with 3-4 vendors at Talad Thai. Once they know you are a regular restaurant buyer, they will hold stock for you, extend credit terms, and call you when prices drop on items you use frequently. The relational aspect of Thai wholesale markets is real and worth investing in.
+
+### Makro (แม็คโคร) -- Multiple Bangkok Locations
+
+Thailand's equivalent of Costco for foodservice. Clean, air-conditioned, with standardised packaging and pricing.
+
+**Best for:** Proteins (pork, chicken, beef), dairy, sauces and condiments, cooking oils, dry goods, cleaning supplies, packaging.
+
+**Pricing advantage:** 20-40% below retail. Consistent pricing -- you know exactly what you will pay each visit, which simplifies budgeting.
+
+**Minimum order:** No minimum. Individual items are available, though many are in bulk packaging (e.g., 5-litre cooking oil, 10 kg bags of sugar).
+
+**Drawback:** Not the cheapest for fresh produce or seafood -- Talad Thai beats Makro on these categories by 15-25%. Makro's strength is in processed and semi-processed ingredients, proteins, and non-perishables.
+
+**Card requirement:** Free Makro card (business registration or ID card required to register). Some restaurants use a buyer's personal card; it is better to register a business card for tax documentation.
+
+### Or Tor Kor Market (ตลาด อตก.) -- Chatuchak
+
+The premium wholesale market, adjacent to Chatuchak Weekend Market. Known for the highest quality produce in Bangkok.
+
+**Best for:** Premium fruits, specialty vegetables, premium-grade meats, and ingredients where quality directly translates to dish quality (e.g., premium mangoes for sticky rice, heirloom tomatoes, high-grade pork belly).
+
+**Pricing advantage:** Minimal. Or Tor Kor is 10-20% more expensive than Talad Thai on comparable items. You pay a premium for consistency and quality grading.
+
+**When to use it:** Fine dining restaurants and any concept where ingredient quality is a core selling point. A casual restaurant buying all produce at Or Tor Kor is overspending. A fine dining restaurant buying key hero ingredients at Or Tor Kor and commodity items at Makro is optimising.
+
+### Direct Suppliers and Distributors
+
+For restaurants doing 800,000+ THB/month in revenue, direct supplier relationships become viable and often offer the best pricing:
+
+**Protein suppliers:** Companies like Betagro and CP (Charoen Pokphand) supply chicken, pork, and eggs directly to restaurants. Minimum orders are typically 50-100 kg/week, with 10-15% savings over Makro pricing. Delivery is included.
+
+**Seafood suppliers:** Bangkok has dozens of seafood distributors operating from Mahachai (Samut Sakhon). For regular orders of 30+ kg/week, they will deliver to your restaurant at wholesale market prices with next-day delivery. Quality is typically better than Makro frozen seafood because you can specify freshness and sizing.
+
+**Dry goods and sauces:** Direct from manufacturers (Tiparos, Maekrua, etc.) for very high-volume users. More practical: join a restaurant co-buying group on LINE where 5-10 restaurants pool orders to hit manufacturer minimums and share delivery costs.
+
+<Callout type="warning">
+Never rely on a single supplier for any critical ingredient. I have seen restaurants lose a full day of service because their sole pork supplier had a delivery truck breakdown. Maintain at least two sources for your top five ingredients, and keep a Makro trip as your emergency backup for everything else.
+</Callout>
+
+### The Sourcing Matrix
+
+For a typical casual Thai restaurant in Bangkok, here is the optimal split:
+
+<CostBreakdown items={[
+  { category: "Proteins (pork, chicken, seafood)", low: "Makro or direct supplier", high: "Direct supplier", notes: "40-50% of food spend. Price sensitivity highest here." },
+  { category: "Fresh produce (vegetables, herbs)", low: "Talad Thai", high: "Or Tor Kor (fine dining)", notes: "20-25% of food spend. Talad Thai 2-3x/week." },
+  { category: "Cooking oils and fats", low: "Makro", high: "Makro", notes: "Standardised product, buy in bulk (18L tins)." },
+  { category: "Sauces and condiments", low: "Makro", high: "Direct from manufacturer", notes: "10-15% of food spend. Buy monthly in bulk." },
+  { category: "Rice and dry goods", low: "Makro or Talad Thai", high: "Talad Thai for rice", notes: "5-10% of food spend. Rice at 30-40 THB/kg wholesale." },
+  { category: "Specialty / imported items", low: "Makro or specialist", high: "Specialist importer", notes: "5-8% of food spend. Cheese, butter, wine for cooking." }
+]} />
+
+A well-optimised sourcing strategy saves 8-15% on total food purchases compared to buying everything from a single source. For a restaurant spending 450,000 THB/month on food, that is 36,000-67,500 THB/month in savings -- a meaningful number that goes straight to your bottom line.
+
+## Step 3: Track Waste Like It Is Money (Because It Is)
+
+Food waste in a typical Bangkok restaurant runs 8-15% of food purchases. On 450,000 THB/month in purchases, that is 36,000-67,500 THB thrown in the bin. Most of this waste is avoidable with tracking and simple systems.
+
+There are three categories of waste, and each needs a different approach.
+
+### Pre-Service Waste (Prep Waste)
+
+This is the food that never makes it to a plate: vegetable trimmings, protein trimmings, expired ingredients pulled from storage, and over-prepped items that do not sell.
+
+**How to track it:** Place a clear bin (not a garbage bag -- a clear bin so you can see what is in it) at each prep station. At the end of each shift, weigh the bin and record the weight and the primary contents. "Prep waste: 4.2 kg -- mostly morning glory stems, chicken skin, overripe tomatoes."
+
+**Target:** Prep waste should be under 5% of total food purchases by weight. If it is higher, look at:
+
+- **Over-ordering.** Are you buying more than you need? Fresh herbs are the worst offender -- a cook who orders 3 kg of holy basil "just in case" when the recipes call for 2 kg is throwing 1 kg (roughly 100-120 THB) in the bin twice a week.
+
+- **Improper storage.** Vegetables stored incorrectly lose shelf life fast in Bangkok's heat and humidity. The number one rule: everything off the floor, in airtight containers, at the correct temperature. A walk-in cooler at 2-4°C extends the life of most Thai herbs by 2-3 days.
+
+- **Skills gap.** A cook who trims 30% of a chicken breast is wasting protein. A cook who trims 10% is skilled. Trimming technique matters, and it is trainable. Spend 30 minutes with your prep team demonstrating optimal trimming for your top five proteins.
+
+### Service Waste (Plate Waste)
+
+Food returned to the kitchen on plates -- what customers did not eat. This is harder to control but still diagnostic.
+
+**How to track it:** Have your dishwashing team sort returned food by category for one week each quarter. "Returned rice: 3.2 kg. Returned salad garnish: 1.8 kg. Returned soups: 2.1 kg."
+
+**What it tells you:**
+
+- **Excessive returned rice** means your rice portions are too large. Thai restaurants commonly serve 200-250g of cooked rice per person, but if 30% is coming back, drop to 150-180g and offer free refills. You save on rice cost (small) and waste (measurable), while customers who want more can ask.
+
+- **Returned garnishes** suggest your plating includes decorative elements customers do not eat. A carved carrot flower costs 2 THB in prep time and ingredients, and if it goes in the bin every time, multiply that by 100 covers/day. Just stop doing it unless it is core to your concept.
+
+- **Returned proteins** might indicate portions are too large, or a dish is not as appealing as expected. Both are worth investigating.
+
+### Spoilage Waste
+
+Ingredients that expire or deteriorate before use. This is directly tied to inventory management and ordering frequency.
+
+**How to track it:** Maintain a spoilage log in the kitchen. Any time someone discards an ingredient due to spoilage, they log the item, quantity, estimated cost, and reason. "2 kg pork belly, ~240 THB, forgotten in walk-in for 5 days."
+
+**Target:** Spoilage should be under 2% of food purchases. If it is higher, the culprit is usually:
+
+- **Ordering too much.** Your weekly order should be based on projected sales (use last week's POS data), not on guesswork or habit. A restaurant that orders the same quantities every week regardless of expected covers is over-ordering during slow weeks and under-ordering during busy ones.
+
+- **FIFO failure.** First In, First Out. Older stock should be used before newer stock. This requires labelling every container with a received date (a roll of painter's tape and a marker costs 50 THB and pays for itself instantly) and physically placing new stock behind old stock.
+
+- **Temperature breaks.** A delivery that sits on the loading dock in 35°C Bangkok heat for an hour has lost 1-2 days of shelf life. Every delivery should go directly into cold storage. No exceptions.
+
+<Callout type="tip">
+The single most effective waste reduction tool I have seen in Thai restaurants is a whiteboard in the kitchen that shows daily waste cost. When the team sees "Tuesday: 1,850 THB waste" written in marker every morning, waste drops. People manage what they measure, and visual accountability works better than lectures. One Sukhumvit client cut waste from 12% to 6% in three months just by tracking and posting the number daily.
+</Callout>
+
+## Step 4: Portion Control -- The Quiet Margin Killer
+
+Inconsistent portioning is the number one cause of food cost variance between what your recipe cards say and what your kitchen actually spends. And the variance is always in one direction: cooks over-portion. Nobody under-portions.
+
+Here is the math. If your pad kra pao recipe calls for 200g of pork and your cooks consistently use 240g (a common 20% over-portion), you are spending an extra 5-6 THB per serving. On 60 orders/day, that is 300-360 THB/day or 9,000-10,800 THB/month -- on one dish. Scale that across a 25-item menu and you can easily lose 30,000-50,000 THB/month to over-portioning alone.
+
+### Tools for Portion Control
+
+**Digital scales at every station.** A decent kitchen scale costs 300-500 THB. You need at least three: one for the protein station, one for the prep station, and one for plating. Make it policy that all proteins are weighed before cooking. Not "eyeballed." Weighed.
+
+**Portion scoops and ladles.** Use standardised scoops for rice (a 150g rice scoop costs 50 THB and eliminates guessing), standardised ladles for soups and curries (mark the correct fill level with a notch or piece of tape), and portion bags for pre-portioned proteins.
+
+**Pre-portioning.** The most effective system: portion proteins during morning prep into individual serving bags. 200g of pork per bag, 150g of chicken per bag, 3 prawns per bag. During service, the cook grabs one bag per order. No measuring, no guessing, no over-portioning. This adds 15-20 minutes to morning prep and saves hours of variability during service.
+
+**Plating guides.** Photograph the correct plating for every dish and post the photos at the pass. This is especially important when you have multiple cooks who plate differently. The photo is the standard. Any plate that does not match gets sent back and replated.
+
+### Common Portioning Issues in Thai Restaurants
+
+**Rice.** The standard serving should be 150-180g of cooked rice, not the mountain that many kitchens default to. Offer free refills to eliminate customer concern, but start with a controlled portion.
+
+**Protein in stir-fries.** Pad kra pao and similar stir-fries should use 180-200g of protein, not "a handful." The difference between a fistful of minced pork from a cook with small hands and one with large hands is 30-50g -- and 4-6 THB per plate.
+
+**Prawns in tom yum and pad thai.** Prawn portions are the highest-variance item in most Thai kitchens because prawn sizes vary. Standardise by count, not by weight: "4 prawns per serving of tom yum goong, size 31/40." This removes ambiguity.
+
+**Curry portions.** Specify the ladle size and number of ladles per serving. "Two full ladles of the 120ml ladle" is a precise instruction. "A bowl of curry" is not.
+
+**Cooking oil.** Cooks who deep-fry tend to add oil liberally. At 65 THB/litre, excess oil adds up. Track oil usage weekly: litres used divided by covers served gives you a per-cover oil cost. If it is above 3-4 THB/cover for a typical Thai kitchen, investigate.
+
+## Step 5: Menu Design for Cost Control
+
+Your menu is not just a sales tool -- it is a cost control tool. The items you feature, the way you describe them, and the structure of your offerings all affect your blended food cost.
+
+### Push High-Margin Categories
+
+As I covered in the [menu engineering article](/blog/menu-engineering-thailand), different dish categories carry different margins:
+
+- **Stir-fries:** 70-80% margin (pad kra pao, pad pak, etc.)
+- **Curries:** 68-75% margin
+- **Rice dishes:** 65-75% margin
+- **Beverages:** 78-88% margin
+- **Seafood mains:** 50-65% margin
+
+A menu that features stir-fries and curries prominently, with seafood as a premium add-on rather than the default, will naturally run a lower blended food cost. This does not mean removing seafood -- it means not leading with it, not photographing it as the hero, and not pricing it so aggressively that it becomes a Plowhorse dragging your margins down.
+
+### Seasonal Ingredient Substitution
+
+Bangkok ingredient prices fluctuate significantly by season. Smart operators build flexibility into their recipes:
+
+**Morning glory (pak boong):** 20-30 THB/kg in the rainy season, 40-60 THB/kg in the hot season. When the price spikes, substitute with water spinach (pak bung na) or Chinese broccoli (kana), both of which are available year-round at stable prices.
+
+**Prawns:** Cheapest from November to February (cool season, peak harvesting). Price can rise 30-40% from May to August. During expensive months, promote chicken and pork dishes more aggressively and reduce prawn-heavy items on your specials board.
+
+**Limes:** Bangkok lime prices are notoriously volatile -- from 60 THB/kg to 200 THB/kg depending on season and supply shocks. Keep a small buffer stock and consider frozen lime juice (adequate for cooking, not for garnish) as an emergency substitute when prices spike above 150 THB/kg.
+
+**Mangoes:** Seasonal (March-June). Build mango dishes as limited-time specials during peak season when prices are lowest (40-60 THB/kg for nam dok mai variety) and food cost is most favorable, and remove them when prices climb above 100 THB/kg.
+
+<Callout type="info">
+Monitor the Thai Department of Internal Trade's weekly price bulletins for major ingredients. These are published every Wednesday at [dit.go.th](https://dit.go.th) and give you early warning on price movements. When you see pork trending up for three consecutive weeks, you can adjust ordering or promote chicken-heavy specials before the increase hits your P&L.
+</Callout>
+
+### Utilise Cross-Menu Ingredients
+
+A focused menu that uses the same base ingredients across multiple dishes reduces waste and simplifies purchasing. In a Thai restaurant, this happens naturally:
+
+- **Chicken:** pad kra pao gai, green curry gai, khao man gai, chicken fried rice, chicken satay
+- **Pork:** pad kra pao moo, moo ping, moo tod gratiem, tom saap, fried rice with pork
+- **Prawns:** tom yum goong, pad thai goong, goong tod, yum goong
+
+If you are carrying 40+ unique proteins or vegetables, you probably have items that appear in only one or two dishes. Either add those ingredients to more dishes (creating a new dish that uses an underutilised ingredient) or drop the underutilised items and the dishes that depend on them. Every unique ingredient in your inventory is a potential waste source and a purchasing complication.
+
+## Step 6: Inventory Management Basics
+
+You cannot control food costs without controlling inventory. I have audited restaurants where the owner had no idea what was in the walk-in cooler, how much they had spent on food that week, or when their last delivery was received. Their stated food cost was 30%. Their actual food cost was 41%. The gap was sitting in expired food, missing inventory, and unrecorded waste.
+
+### The Weekly Inventory Count
+
+Take a physical inventory count every week, same day, same time. Sunday evening or Monday morning works for most Bangkok restaurants.
+
+**What to count:** Every food item in the kitchen, walk-in, dry storage, and bar. Proteins, produce, sauces, dry goods, beverages.
+
+**How to value it:** Use the most recent purchase price for each item. A 5 kg bag of jasmine rice bought at 180 THB last week is valued at 36 THB/kg, even if the next delivery is quoted at 38 THB/kg.
+
+**The food cost formula:**
+> Opening inventory + Purchases during the week - Closing inventory = Food used
+> Food used / Food revenue for the week = Actual food cost %
+
+This is the number that tells you whether your recipe costing cards match reality. If your cards say 30% and your actual is 36%, the 6-point gap is coming from somewhere: waste, over-portioning, theft, unrecorded vendor credits, or recipe card errors.
+
+**Time commitment:** A trained staff member can count a full casual restaurant inventory in 60-90 minutes. It is a Sunday evening task, not a full day project.
+
+### The Par Level System
+
+Par levels are the maximum quantity of each ingredient you want in stock at any time. They are based on your usage rate and your delivery frequency:
+
+> Par level = (average daily usage x days between deliveries) + safety stock
+
+For a Bangkok restaurant receiving deliveries 3 times per week:
+
+- **Pork (daily usage: 8 kg):** Par level = 8 kg x 2.5 days + 20% safety = 24 kg
+- **Holy basil (daily usage: 1 kg):** Par level = 1 kg x 2.5 days + 30% safety = 3.3 kg (higher safety stock because herbs spoil faster)
+- **Fish sauce (daily usage: 0.5 litres):** Par level = 0.5 x 7 days + 10% safety = 3.85 litres (ordered weekly, low spoilage risk)
+
+**Order quantity = Par level - Current stock**
+
+This system prevents both over-ordering (which causes waste) and under-ordering (which causes menu shortages and emergency purchases at retail prices). It takes the guesswork out of ordering and lets a junior staff member place accurate orders without needing the head chef's judgment.
+
+<Callout type="tip">
+Bangkok's traffic means delivery timing is unpredictable. If your Talad Thai supplier says "delivery by 10 AM" and arrives at 1 PM, you have lost three hours of prep time. Schedule critical deliveries for early morning (before 8 AM) and build a half-day buffer into your safety stock for any ingredient that has a single-source supplier.
+</Callout>
+
+## Step 7: Vendor Negotiation -- Getting Better Prices
+
+Most Bangkok restaurant owners accept the first price quoted by their suppliers and never negotiate. This is a mistake. Suppliers expect negotiation, they build margin into their initial quotes, and they reward loyalty and volume with better terms.
+
+### Negotiation Tactics That Work in Thailand
+
+**Volume commitment.** "I will guarantee 100 kg of chicken per week for the next 3 months if you can give me 10 THB/kg off your current price." This is the most effective negotiation lever because it gives the supplier revenue certainty. A 10 THB/kg discount on 100 kg/week is 4,000 THB/month in savings -- on one ingredient.
+
+**Payment terms.** Most small suppliers in Bangkok expect cash on delivery. Larger suppliers offer 7-15 day credit terms. Ask for 14-day terms even if you can pay immediately -- this improves your cash flow and gives you time to verify delivery quality and quantities before paying.
+
+**Competitive quotes.** Get prices from three suppliers for the same items. You do not need to switch suppliers every week -- use the quotes as leverage. "Supplier B is offering me chicken at 105 THB/kg. Can you match that?" Most suppliers will match or come close because the cost of losing a regular customer exceeds the margin they give up.
+
+**Seasonal contracts.** For ingredients with predictable price swings (prawns, seasonal fruits), negotiate a fixed price for 3-6 months. The supplier gets guaranteed volume; you get price stability. This works particularly well from September to November when suppliers are building relationships before peak season demand.
+
+**Bundle your purchases.** A supplier who sells you pork, chicken, and eggs is more motivated to negotiate than one who sells you only pork. Consolidating purchases with fewer suppliers gives each supplier a bigger slice of your business and more reason to offer competitive pricing.
+
+### What Not to Do
+
+**Do not squeeze suppliers to the point of quality compromise.** A pork supplier who gives you a 10% discount might start sending you lower-grade cuts. Specify quality standards in writing and reject deliveries that do not meet them.
+
+**Do not change suppliers constantly.** The transactional cost of switching (new delivery schedules, learning new product specs, building new relationships) outweighs the marginal savings from chasing the lowest price. Find 2-3 reliable suppliers and negotiate loyalty-based pricing with them.
+
+**Do not ignore small suppliers.** The noodle maker in your neighbourhood who hand-makes fresh rice noodles is not going to match Makro's price, but his product may be meaningfully better, which translates to customer satisfaction and justified menu pricing. Not every ingredient should be sourced on price alone.
+
+## Real-World Results: Three Bangkok Restaurants That Cut Food Costs
+
+These are anonymised but real examples from my consulting work. Each restaurant implemented the systems described in this article over a 60-90 day period.
+
+### Case 1: Casual Thai Restaurant, Ari (65 seats)
+
+**Starting food cost:** 37%
+**Revenue:** 1.4 million THB/month
+
+**Problems identified:**
+- No recipe costing cards -- kitchen was "eyeballing" everything
+- All purchasing from Makro (no Talad Thai or direct suppliers)
+- No waste tracking
+- Portion sizes inconsistent -- varied 25-30% between cooks
+- Three menu items with food cost above 50% (prawn-heavy dishes underpriced)
+
+**Actions taken:**
+- Built recipe costing cards for all 28 menu items
+- Switched produce purchasing to Talad Thai (3x/week delivery arrangement)
+- Implemented pre-portioning for all proteins during morning prep
+- Repriced three prawn dishes by 30-40 THB each
+- Removed two Dogs from the menu (expensive to produce, rarely ordered)
+- Installed waste tracking whiteboard
+
+**Result after 90 days:** Food cost dropped from 37% to 31%. On 1.4M THB/month revenue, that 6-point drop saved 84,000 THB/month, or just over 1 million THB/year. The cost of implementation (my consulting fee, the scale, the whiteboard, the first Talad Thai relationship-building) was under 80,000 THB total.
+
+### Case 2: Japanese-Thai Fusion, Thonglor (40 seats)
+
+**Starting food cost:** 42%
+**Revenue:** 1.8 million THB/month
+
+**Problems identified:**
+- Imported Japanese ingredients (dashi, mirin, specialty sauces) at retail markup
+- Sashimi-grade fish portions 30% above recipe spec
+- No par levels -- ordering was "whatever the chef felt like"
+- Fish spoilage running 8% of total fish purchases
+
+**Actions taken:**
+- Found a direct importer for Japanese sauces and condiments (bypassing the retail middleman)
+- Switched sashimi fish to a direct Mahachai supplier with 3x/week delivery
+- Implemented strict portioning for sashimi (gram weight per piece, piece count per plate)
+- Set par levels for all perishables, especially fish
+- Added a FIFO labelling system in the walk-in
+
+**Result after 60 days:** Food cost dropped from 42% to 36%. That 6-point drop on 1.8M THB/month saved 108,000 THB/month. Fish spoilage dropped from 8% to 2.5%.
+
+### Case 3: Cloud Kitchen, Rama 9 (delivery only, 3 brands)
+
+**Starting food cost:** 34%
+**Revenue:** 600,000 THB/month (net of platform commission)
+
+**Problems identified:**
+- Food cost measured against gross revenue, not net -- actual cost against net revenue was 48%
+- Packaging cost not tracked (was running 9% of gross revenue)
+- Over-portioning to avoid negative delivery reviews
+- No recipe cards for any of the three brands
+
+**Actions taken:**
+- Recalculated all food costs against net revenue (after platform commission)
+- Built recipe cards for 35 items across three brands, using shared ingredient pool
+- Standardised portions and switched to pre-portioning bags
+- Negotiated packaging costs down from 3.50 THB to 2.20 THB per container by switching supplier
+- Raised delivery prices by 12% on items where food cost exceeded 35% of net revenue
+- Dropped 8 low-margin items that were not worth producing after commission
+
+**Result after 90 days:** Effective food cost (against net revenue) dropped from 48% to 38%. Combined with the price increase and packaging savings, monthly profit increased by 72,000 THB on roughly the same order volume. As a percentage of the 600,000 THB net revenue, that 72,000 THB was a 12-point swing in profitability.
+
+<Callout type="warning">
+Cloud kitchen operators: always measure your food cost against net revenue (after platform commission), not gross. A dish that costs 60 THB to make and sells for 200 THB looks like 30% food cost on paper, but after GrabFood takes 35% (70 THB), your net revenue is 130 THB and your actual food cost is 46%. This distinction is the difference between thinking you are profitable and knowing you are not.
+</Callout>
+
+## Building a Food Cost Culture
+
+Systems only work if people use them. The biggest challenge in food cost control is not the spreadsheets or the scales -- it is getting your kitchen team to care about costs the way you do.
+
+Here is what works:
+
+**Share the numbers.** Most kitchen staff in Bangkok have no idea what the restaurant's food cost is. They do not know that the 50 THB worth of prawns they over-portioned on today's pad thai costs the business 1,500 THB/month. Post weekly food cost on the kitchen whiteboard. Make it visible and non-judgmental.
+
+**Tie incentives to results.** If your target food cost is 30% and the kitchen hits it for the month, share a portion of the savings with the team. Even a 2,000-3,000 THB bonus split among the kitchen staff creates ownership over the number.
+
+**Train on the why, not just the what.** "Weigh the pork" is an instruction. "We spend 180,000 THB/month on pork, and every gram over the recipe spec comes directly out of our profit" is a reason. People follow instructions reluctantly. They adopt practices when they understand the purpose.
+
+**Make it easy.** If using a scale adds 30 seconds to every order during a busy service, cooks will stop using it. Pre-portion during morning prep so that service is fast and consistent. If the waste bin is across the kitchen, cooks will not walk over to sort waste -- put bins at every station.
+
+**Lead from the top.** If the owner or head chef does not take food cost seriously, nobody else will either. When the head chef weighs every protein and logs every waste event, the team follows. When the head chef says "that is close enough" on portions, the team hears "accuracy does not matter."
+
+For related operational challenges including [staffing, lease negotiation, and why restaurants fail](/blog/why-restaurants-fail-thailand), the common thread is always the same: systems beat intuition. The restaurants that track their numbers, set standards, and hold their team accountable survive. The ones that rely on gut feeling and hope do not.
+
+## The 30-Day Food Cost Sprint
+
+If your food cost is higher than it should be and you want to bring it down fast, here is the sequence:
+
+**Week 1: Measure**
+- Calculate your actual food cost (not estimated) for the past 4 weeks
+- Build recipe costing cards for your top 10 selling items
+- Take a full physical inventory count
+
+**Week 2: Identify**
+- Compare recipe card costs to actual food cost -- where is the gap?
+- Identify the top 3 sources of the gap (usually: over-portioning, waste, pricing)
+- Get competitive quotes from 2-3 suppliers for your top 5 ingredients
+- Track waste daily using the bin-and-whiteboard method
+
+**Week 3: Implement**
+- Pre-portion all proteins for daily service
+- Switch one or two sourcing channels (e.g., produce from retail to Talad Thai)
+- Reprice any menu items where food cost exceeds 40% (unless fine dining)
+- Set par levels for all perishable ingredients
+- Brief and train kitchen staff on the changes
+
+**Week 4: Monitor**
+- Calculate food cost for the week (should already show improvement)
+- Review waste logs and identify remaining problem areas
+- Adjust par levels based on actual usage data
+- Take closing inventory and calculate the month's actual food cost
+
+Most restaurants see a 3-5 percentage point drop in food cost within the first 30 days, with another 2-3 points coming over the following 60 days as systems become habitual.
+
+For pricing strategy that works alongside cost control -- including [anchoring, decoy pricing, and set meal bundling](/blog/menu-pricing-psychology-thailand) -- the best approach is to work both levers simultaneously: reduce what each dish costs to produce while maximising what customers are willing to pay for it. That is the path to a well-run restaurant.
+
+---
+
+## Frequently Asked Questions
+
+<FAQ items={[
+  {
+    question: "What is a good food cost percentage for a casual Thai restaurant in Bangkok?",
+    answer: "28-33% is the target range for casual Thai dining. Below 28% is excellent but rare -- it usually means you are either very focused on high-margin stir-fries and curries, or your portions are tight. Above 33% means you have room for improvement through better sourcing, portion control, or repricing. The Bangkok average for well-run independents is around 30-32%."
+  },
+  {
+    question: "How often should I update my recipe costing cards?",
+    answer: "Quarterly at minimum, and immediately after any major price change from your suppliers. In practice, protein prices in Bangkok shift monthly and produce prices shift weekly with seasonal supply. Linking your recipe cards to a master price list spreadsheet that you update monthly gives you continuous visibility without rebuilding every card from scratch."
+  },
+  {
+    question: "Is Talad Thai worth the trip from central Bangkok?",
+    answer: "For restaurants spending more than 200,000 THB/month on food, yes. The 30-50% savings on produce and 10-20% savings versus Makro on most items easily justify the logistics cost. The key is establishing a regular delivery arrangement with 2-3 vendors so you do not need to make the trip yourself every time. Most Talad Thai vendors will deliver to Bangkok restaurants for orders above 3,000-5,000 THB."
+  },
+  {
+    question: "How do I reduce food cost without affecting quality?",
+    answer: "Focus on the three areas that do not touch the customer's plate: waste reduction (track and minimise spoilage, prep waste, and over-production), portion consistency (weigh proteins, use standardised scoops, pre-portion during prep), and sourcing optimisation (buy the same quality from a cheaper channel, not cheaper quality from the same channel). These typically account for 5-8 percentage points of avoidable food cost."
+  },
+  {
+    question: "Should I track food cost weekly or monthly?",
+    answer: "Weekly. Monthly food cost is useful for trend tracking but too slow for catching problems. If your food cost spikes in week 1 due to a supplier price increase or a new cook over-portioning, you want to know immediately -- not 30 days later when you close the books. A weekly inventory count and food cost calculation takes 90 minutes and gives you the data to act in real time."
+  },
+  {
+    question: "What is the fastest way to cut food cost by 5 percentage points?",
+    answer: "In order of impact: (1) Build recipe costing cards and identify items with food cost above 40% -- reprice or reformulate them. (2) Pre-portion all proteins during morning prep. (3) Switch at least one sourcing channel from retail or convenience to wholesale. These three changes alone typically deliver a 4-6 point reduction within the first month. The ongoing systems (waste tracking, par levels, vendor negotiation) bring the additional 2-3 points over the following months."
+  }
+]} />
+
+Want help bringing your food costs under control? Our [menu engineering service](/services/menu-engineering) includes recipe costing for your full menu, sourcing optimisation, waste reduction systems, and portion control standards -- tailored to your specific restaurant and Bangkok market conditions. [Book a free consultation](/free-consultation) and bring your last 3 months of purchasing invoices.

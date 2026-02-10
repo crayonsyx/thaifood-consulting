@@ -134,6 +134,10 @@ export default defineConfig({
               { value: "menu-engineering", label: "Menu Engineering" },
               { value: "fnb-trends", label: "F&B Trends" },
               { value: "operations", label: "Operations" },
+              { value: "marketing", label: "Marketing" },
+              { value: "financial-management", label: "Financial Management" },
+              { value: "technology", label: "Technology" },
+              { value: "scaling", label: "Scaling & Growth" },
             ],
           },
           {

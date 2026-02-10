@@ -37,4 +37,8 @@ export const categories = [
   { label: "Menu Engineering", slug: "menu-engineering" },
   { label: "F&B Trends", slug: "fnb-trends" },
   { label: "Operations", slug: "operations" },
+  { label: "Marketing", slug: "marketing" },
+  { label: "Financial Management", slug: "financial-management" },
+  { label: "Technology", slug: "technology" },
+  { label: "Scaling & Growth", slug: "scaling" },
 ] as const;
