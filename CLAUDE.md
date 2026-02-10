@@ -126,7 +126,8 @@ npm run lint     # ESLint
 - Homepage with 7 sections
 - About page with founder story
 - 4 service pages (Menu Engineering, Concept Development, Cloud Kitchen, Feasibility Study)
-- Blog system with MDX rendering, **20 SEO blog posts** (3000-5000 words each, 14 published + 6 scheduled):
+- Blog system with MDX rendering, **20 SEO blog posts** (3000-5000 words each, all published):
+  Dates span Dec 15, 2025 to Feb 10, 2026 (~3 day cadence). All humanized + sentence flow pass applied.
   **Opening a Restaurant (10):**
   1. The Complete Guide to Opening a Restaurant in Thailand (2026) — *featured*
   2. How to Open a Fine Dining Restaurant in Bangkok
@@ -137,20 +138,20 @@ npm run lint     # ESLint
   7. How to Find a Restaurant Location in Bangkok
   8. How to Open a Bar in Thailand as a Foreigner
   9. The Complete Restaurant Licensing Checklist for Thailand (2026)
-  10. Beyond Bangkok: The 5 Best Cities to Open a Restaurant *(scheduled)*
+  10. Beyond Bangkok: The 5 Best Cities to Open a Restaurant
   **Operations (4):**
   11. Restaurant Staffing in Thailand: Salaries, Labor Law, Retention
   12. Why Restaurants Fail in Thailand: 12 Reasons
   13. Thailand's New Alcohol Law: What Every Restaurant Owner Needs to Know
-  14. How to Negotiate a Restaurant Lease in Bangkok *(scheduled)*
+  14. How to Negotiate a Restaurant Lease in Bangkok
   **F&B Trends (3):**
   15. 7 Restaurant Concepts That Are Working in Bangkok Right Now (2026)
-  16. What Thailand's 2026 Michelin Guide Tells Us *(scheduled)*
-  17. Foodpanda Is Gone: What Thailand's Delivery Duopoly Means *(scheduled)*
+  16. What Thailand's 2026 Michelin Guide Tells Us
+  17. Foodpanda Is Gone: What Thailand's Delivery Duopoly Means
   **Other (3):**
   18. Menu Engineering for Thai Restaurants (operations/menu-engineering)
-  19. How to Start a Food Truck Business in Thailand *(scheduled)*
-  20. Thailand Work Permit and Visa Guide for Restaurant Owners *(scheduled)*
+  19. How to Start a Food Truck Business in Thailand
+  20. Thailand Work Permit and Visa Guide for Restaurant Owners
 - Case studies system with 2 placeholder studies
 - Contact + Free Consultation forms (Web3Forms)
 - WhatsApp floating button
@@ -165,10 +166,10 @@ npm run lint     # ESLint
 - **API route inlined** — `pages/api/tina/[...routes].ts` uses next-auth directly with `require()` (static imports crash due to ESM/CJS interop in Pages API routes)
 - **Admin assets committed** — 34 files in `public/admin/` (previously gitignored)
 
-## Vercel Deployment Status (2026-02-09)
+## Vercel Deployment Status (2026-02-10)
 - **LIVE**: Site deployed, admin API + auth working
 - All public pages return 200 (blog, case studies, homepage, etc.)
-- Blog listing shows all 20 posts (14 published, 6 scheduled), individual posts render fully
+- Blog listing shows all 20 posts (all published, dates Dec 2025 - Feb 2026), individual posts render fully
 - `/api/tina/gql` returns 401 for unauthenticated requests (correct)
 - `/api/tina/auth/csrf` returns CSRF token (auth working)
 - **Admin login works** — `admin` / `changeme123` at `/admin/index.html`
