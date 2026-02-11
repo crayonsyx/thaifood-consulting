@@ -24,6 +24,7 @@ export const metadata: Metadata = {
         url: `${siteConfig.url}/api/og?title=${encodeURIComponent("About Us")}&subtitle=${encodeURIComponent("Michelin-starred F&B consulting")}`,
         width: 1200,
         height: 630,
+        alt: "About ThaiFood Consulting - Michelin-starred F&B consulting",
       },
     ],
   },

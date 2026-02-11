@@ -27,6 +27,33 @@ export async function generateMetadata({
   return {
     title: service.title,
     description: service.description,
+    alternates: {
+      canonical: `${siteConfig.url}/services/${slug}`,
+    },
+    openGraph: {
+      title: `${service.shortTitle} | ${siteConfig.name}`,
+      description: service.description,
+      url: `${siteConfig.url}/services/${slug}`,
+      images: [
+        {
+          url: `${siteConfig.url}/api/og?title=${encodeURIComponent(service.shortTitle)}&subtitle=${encodeURIComponent("F&B Consulting Service")}`,
+          width: 1200,
+          height: 630,
+          alt: `${service.shortTitle} - ThaiFood Consulting`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${service.shortTitle} | ${siteConfig.name}`,
+      description: service.description,
+      images: [
+        {
+          url: `${siteConfig.url}/api/og?title=${encodeURIComponent(service.shortTitle)}&subtitle=${encodeURIComponent("F&B Consulting Service")}`,
+          alt: `${service.shortTitle} - ThaiFood Consulting`,
+        },
+      ],
+    },
   };
 }
 

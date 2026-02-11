@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CheckCircle, ArrowRight } from "lucide-react";
+import { siteConfig } from "@/lib/constants";
 import CTA from "@/components/shared/CTA";
 
 export const metadata: Metadata = {
@@ -8,6 +9,18 @@ export const metadata: Metadata = {
   robots: {
     index: false,
     follow: false,
+  },
+  openGraph: {
+    title: `Thank You | ${siteConfig.name}`,
+    description: "Thank you for contacting ThaiFood Consulting. We will be in touch soon.",
+    images: [
+      {
+        url: `${siteConfig.url}/api/og?title=${encodeURIComponent("Thank You")}&subtitle=${encodeURIComponent("We will be in touch soon")}`,
+        width: 1200,
+        height: 630,
+        alt: "Thank You - ThaiFood Consulting",
+      },
+    ],
   },
 };
 

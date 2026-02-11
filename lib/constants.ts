@@ -3,7 +3,7 @@ export const siteConfig = {
   description:
     "F&B consulting firm with Michelin-starred experience, helping restaurants and food businesses launch, grow, and optimize in Thailand and Southeast Asia.",
   url: "https://thaifood-consulting.vercel.app",
-  ogImage: "/og.png",
+  ogImage: "/api/og?title=ThaiFood%20Consulting&subtitle=F%26B%20Consulting%20with%20Michelin-Starred%20Experience",
   email: "hello@thaifoodconsulting.com",
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "+6587517413",
   phone: "+6587517413",

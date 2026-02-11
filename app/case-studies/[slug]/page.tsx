@@ -31,6 +31,14 @@ export async function generateMetadata({
   const title = study.seo?.title || study.title;
   const description = study.seo?.description || study.excerpt || "";
 
+  const coverPath = study.coverImage?.startsWith("/")
+    ? study.coverImage
+    : `/${study.coverImage}`;
+  const ogImage = study.coverImage
+    ? `${siteConfig.url}${coverPath}`
+    : `${siteConfig.url}/api/og?title=${encodeURIComponent(study.title)}&subtitle=${encodeURIComponent("Case Study")}`;
+  const ogAlt = study.coverImageAlt || study.title;
+
   return {
     title,
     description,
@@ -40,14 +48,13 @@ export async function generateMetadata({
       url: `${siteConfig.url}/case-studies/${study.slug}`,
       type: "article",
       publishedTime: study.date,
-      images: study.coverImage
-        ? [{ url: `${siteConfig.url}/${study.coverImage}`, alt: study.coverImageAlt || study.title }]
-        : undefined,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: ogAlt }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: [{ url: ogImage, alt: ogAlt }],
     },
   };
 }

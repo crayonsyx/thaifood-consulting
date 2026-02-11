@@ -38,11 +38,27 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: `${siteConfig.name} | F&B Consultant Thailand`,
     description: siteConfig.description,
+    images: [
+      {
+        url: `${siteConfig.url}${siteConfig.ogImage}`,
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.name} - F&B Consulting Thailand`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${siteConfig.name} | F&B Consultant Thailand`,
     description: siteConfig.description,
+    images: [
+      {
+        url: `${siteConfig.url}${siteConfig.ogImage}`,
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.name} - F&B Consulting Thailand`,
+      },
+    ],
   },
   robots: {
     index: true,

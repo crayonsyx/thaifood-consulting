@@ -25,6 +25,7 @@ export const metadata: Metadata = {
         url: `${siteConfig.url}/api/og?title=${encodeURIComponent("Our Services")}&subtitle=${encodeURIComponent("F&B Consulting Thailand")}`,
         width: 1200,
         height: 630,
+        alt: "ThaiFood Consulting Services - F&B Consulting Thailand",
       },
     ],
   },

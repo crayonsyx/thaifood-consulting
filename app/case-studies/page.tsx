@@ -25,6 +25,7 @@ export const metadata: Metadata = {
         url: `${siteConfig.url}/api/og?title=${encodeURIComponent("Case Studies")}&subtitle=${encodeURIComponent("Real results from real projects")}`,
         width: 1200,
         height: 630,
+        alt: "ThaiFood Consulting Case Studies - Real results from real projects",
       },
     ],
   },

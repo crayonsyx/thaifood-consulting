@@ -4,20 +4,21 @@ import { siteConfig } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Get in touch with ThaiFood Consulting. Reach us by email, WhatsApp, or contact form for restaurant consulting in Thailand.",
+    "Get in touch with ThaiFood Consulting. Reach us via phone, email, or WhatsApp for expert F&B consulting in Thailand and Southeast Asia. We respond within 24 hours.",
   alternates: {
     canonical: `${siteConfig.url}/contact`,
   },
   openGraph: {
-    title: `Contact | ${siteConfig.name}`,
+    title: `Contact Us | ${siteConfig.name}`,
     description:
-      "Get in touch for F&B consulting in Thailand. We respond within 24 hours.",
+      "Reach out for expert F&B consulting in Thailand. Phone, email, or WhatsApp — we respond within 24 hours.",
     url: `${siteConfig.url}/contact`,
     images: [
       {
-        url: `${siteConfig.url}/api/og?title=${encodeURIComponent("Contact Us")}&subtitle=${encodeURIComponent("F&B Consulting Thailand")}`,
+        url: `${siteConfig.url}/api/og?title=${encodeURIComponent("Contact Us")}&subtitle=${encodeURIComponent("Get in touch with our team")}`,
         width: 1200,
         height: 630,
+        alt: "Contact ThaiFood Consulting",
       },
     ],
   },

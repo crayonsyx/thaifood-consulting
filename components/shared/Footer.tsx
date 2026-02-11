@@ -131,7 +131,7 @@ export default function Footer() {
             &copy; {year} {siteConfig.name}. All rights reserved.
           </div>
           <Link
-            href="/privacy"
+            href="/privacy-policy"
             className="hover:text-foreground transition-colors"
           >
             Privacy Policy
