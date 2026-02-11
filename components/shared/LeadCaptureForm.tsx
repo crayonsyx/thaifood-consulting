@@ -139,23 +139,21 @@ export default function LeadCaptureForm({
           autoComplete="off"
           aria-hidden="true"
         />
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <input
-            type="text"
-            placeholder="First name"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            className="w-full rounded-lg border border-border bg-background-card px-4 py-3 text-foreground placeholder-foreground-subtle focus:border-accent-gold focus:outline-none focus:ring-1 focus:ring-accent-gold sm:w-1/3"
-          />
-          <input
-            type="email"
-            required
-            placeholder="Email address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded-lg border border-border bg-background-card px-4 py-3 text-foreground placeholder-foreground-subtle focus:border-accent-gold focus:outline-none focus:ring-1 focus:ring-accent-gold sm:flex-1"
-          />
-        </div>
+        <input
+          type="text"
+          placeholder="First name"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          className="w-full rounded-lg border border-border bg-background-card px-4 py-4 text-base text-foreground placeholder-foreground-subtle focus:border-accent-gold focus:outline-none focus:ring-1 focus:ring-accent-gold"
+        />
+        <input
+          type="email"
+          required
+          placeholder="Email address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full rounded-lg border border-border bg-background-card px-4 py-4 text-base text-foreground placeholder-foreground-subtle focus:border-accent-gold focus:outline-none focus:ring-1 focus:ring-accent-gold"
+        />
 
         <button
           type="submit"

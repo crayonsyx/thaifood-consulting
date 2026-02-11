@@ -61,13 +61,12 @@ export default async function Home() {
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <h1 className="animate-fade-in-up font-heading text-5xl font-bold leading-tight md:text-7xl">
-            Restaurant Consulting in Thailand.
+            Thailand&apos;s F&amp;B Market Is Unforgiving.
             <br />
-            F&amp;B Strategy from Bangkok — Built to Win.
+            We Make It Work.
           </h1>
           <p className="animate-fade-in-up animation-delay-100 mx-auto mt-6 max-w-2xl text-lg text-white md:text-xl [text-shadow:_0_1px_12px_rgba(0,0,0,0.8)]">
-            Michelin-starred expertise for restaurants and food businesses across
-            Thailand and Southeast Asia.
+            Michelin-starred restaurant consulting from Bangkok — menu strategy, market entry, and operations.
           </p>
           <div className="animate-fade-in-up animation-delay-200 mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <CTA href="/free-consultation">Get Started</CTA>
