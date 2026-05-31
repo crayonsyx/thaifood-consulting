@@ -4,7 +4,6 @@ import "./globals.css";
 import { siteConfig } from "@/lib/constants";
 import Header from "@/components/shared/Header";
 import Footer from "@/components/shared/Footer";
-import WhatsAppButton from "@/components/shared/WhatsAppButton";
 import ExitIntentPopup from "@/components/shared/ExitIntentPopup";
 import Analytics from "@/components/shared/Analytics";
 import JsonLd from "@/components/shared/JsonLd";
@@ -85,7 +84,6 @@ export default function RootLayout({
         <Header />
         <main className="min-h-screen pt-[73px]">{children}</main>
         <Footer />
-        <WhatsAppButton />
         <ExitIntentPopup
           leadMagnet="Free Restaurant P&L Template"
           heading="Before you go..."

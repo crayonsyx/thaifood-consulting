@@ -5,8 +5,10 @@ export const siteConfig = {
   url: "https://thaifood-consulting.vercel.app",
   ogImage: "/api/og?title=ThaiFood%20Consulting&subtitle=F%26B%20Consulting%20with%20Michelin-Starred%20Experience",
   email: "hello@thaifoodconsulting.com",
-  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "+6587517413",
-  phone: "+6587517413",
+  // No personal phone number published. Contact routes through email / form.
+  // (Legacy WhatsApp/phone CTAs now point at the contact page; see usages.)
+  whatsapp: "",
+  phone: "",
   address: {
     city: "Bangkok",
     country: "Thailand",
